@@ -2,62 +2,71 @@
 
 Pembaruan: 25 November 2026
 
-## Audit deployment GitHub Pages
+## Status deployment
 
-Status: **menunggu satu kali aktivasi Pages di pengaturan repository**.
+**GitHub Pages aktif dan deployment berhasil.** Workflow terbaru sebelumnya selesai dengan conclusion `success`; URL preview:
 
-- Repository publik, default branch `main`.
-- File aplikasi tersedia di root: `index.html`.
-- Workflow tersedia: `.github/workflows/pages.yml`.
-- Workflow pertama gagal pada langkah `Configure Pages`, karena repository belum memiliki Pages site (`has_pages: false` / API Pages mengembalikan 404).
-- Kegagalan bukan disebabkan oleh file HTML atau proses upload artifact.
-- Workflow telah diperbarui ke `checkout@v6`, `configure-pages@v5`, `upload-pages-artifact@v4`, dan `deploy-pages@v4`.
-- `configure-pages` tidak diberi `enablement: true` karena input tersebut membutuhkan token selain `GITHUB_TOKEN`; aktivasi paling aman dilakukan satu kali melalui Settings repository.
+https://baguskristiansianturi.github.io/Pluits-partnership/
 
-### Aktivasi yang diperlukan
-Buka repository → Settings → Pages → Build and deployment → Source → pilih **GitHub Actions**. Setelah disimpan, jalankan ulang workflow **Deploy PLUITS Partner to GitHub Pages** pada tab Actions, atau lakukan push commit berikutnya. GitHub akan memberikan URL Pages saat deployment berhasil.
+Workflow: `.github/workflows/pages.yml` — deploy frontend statis dari root repository ke GitHub Pages.
 
-## Versi 0.1 — Frontend peta operasional
+## Versi 0.2 — UI operasional dan alur uji order
 
-Status: frontend prototype awal tersedia di `index.html`.
+Status: implementasi frontend diperbarui di `index.html`.
 
-### Fitur yang tersedia
-- Peta vektor interaktif area Bali menggunakan MapLibre GL JS dan style Liberty dari OpenFreeMap.
-- Titik jemput dan tujuan awal.
-- Pemilihan titik langsung dengan menyentuh peta.
-- Pencarian lokasi saat ini menggunakan Nominatim (belum memenuhi target pencarian POI/autocomplete presisi).
-- Perhitungan rute melalui demo publik Valhalla dengan costing `motor_scooter`, `motorcycle`, dan `auto`.
-- Ringkasan jarak dan estimasi waktu dari hasil routing.
-- Izin lokasi browser untuk menampilkan posisi perangkat.
-- Simulasi status pekerjaan: pesanan dibuat, diterima, tiba di penjemputan, perjalanan berlangsung, selesai.
-- Simulasi marker pengemudi bergerak sepanjang geometri rute.
-- Layout responsif untuk layar ponsel.
+### Perubahan UI
+- Struktur visual diperbarui menjadi operations console dengan header produk, panel peta, panel kerja, hierarki informasi, status, dan tombol aksi yang konsisten.
+- Layout desktop menggunakan peta sebagai area utama dan panel operasional di sisi kanan.
+- Layout mobile menggunakan peta di bagian atas dan panel operasional yang nyaman diakses dari bawah.
+- Mode Pelanggan dan Pengemudi dibuat sebagai dua tampilan operasional yang berbeda dalam prototipe.
+- Progress lima tahap pengemudi ditampilkan agar posisi alur uji mudah dipahami.
+- Peta MapLibre/OpenFreeMap yang sudah ada dipertahankan.
 
-### Audit teknis dan batasan
-- Order, status, dan pergerakan simulasi belum disimpan ke backend.
-- Mode pelanggan/pengemudi belum tersinkronisasi antarperangkat.
-- Belum ada autentikasi, dispatch nyata, WebSocket, atau integrasi Go + PostgreSQL/PostGIS.
-- Pencarian tempat saat ini belum menyediakan autocomplete hasil banyak, ranking berdasarkan posisi pengguna, dan reverse geocoding yang lengkap. Perlu ditingkatkan ke Photon atau geocoder setara; layanan publik tetap memiliki fair-use dan tanpa SLA.
-- Peta dan routing menggunakan layanan publik. Layanan demo Valhalla memiliki kebijakan penggunaan wajar, rate limit, dan bukan jaminan produksi.
-- Data OpenStreetMap perlu diperiksa untuk kelengkapan bangunan, POI, jalan, dan akses sepeda motor di area pengujian.
-- GitHub Pages hanya meng-host frontend statis. Backend Go harus di-deploy terpisah untuk uji dua perangkat.
+### Alur pengujian yang tersedia
+
+1. Buka tab **Pelanggan**.
+2. Periksa titik jemput dan tujuan; ubah melalui pencarian atau tombol pilih titik di peta.
+3. Pilih jenis kendaraan dan tekan **Hitung rute perjalanan**.
+4. Setelah rute tampil, tekan **Buat pesanan sekarang**.
+5. Aplikasi berpindah ke tab **Pengemudi**; periksa order masuk dan detail lokasi.
+6. Tekan **Terima pesanan**.
+7. Tekan **Mulai menuju penjemputan**.
+8. Setelah simulasi tiba, tekan **Konfirmasi tiba di penjemputan**.
+9. Tekan **Mulai perjalanan**; marker bergerak mengikuti geometri rute.
+10. Tekan **Selesaikan pengantaran**; status menjadi selesai.
+11. Gunakan **Atur ulang simulasi** untuk mengulang dari awal.
+
+### Status tahapan
+- Order pelanggan dibuat: tersedia.
+- Order tampil pada tampilan pengemudi: tersedia dalam state lokal browser.
+- Penerimaan order: tersedia.
+- Perjalanan menuju lokasi jemput: status tersedia; marker berada di lokasi jemput (belum simulasi navigasi jalan terpisah menuju pickup).
+- Konfirmasi tiba di lokasi jemput: tersedia.
+- Mulai perjalanan dan animasi marker sepanjang rute: tersedia.
+- Selesaikan pengantaran: tersedia.
+
+## Batasan yang harus dipahami saat pengujian
+
+- Ini **simulasi frontend satu perangkat/browser**, bukan dispatch atau transaksi nyata.
+- Pelanggan dan pengemudi berbagi state lokal; belum ada komunikasi antar dua perangkat.
+- Order dan riwayat belum disimpan di database.
+- Belum ada login, akun, validasi identitas, pembayaran, atau notifikasi.
+- Backend tetap menggunakan **Go + PostgreSQL** (PostGIS bila diperlukan); belum di-deploy. Tidak menggunakan Supabase.
+- GitHub Pages hanya untuk frontend statis; backend perlu hosting terpisah agar dapat diuji lintas perangkat.
+- Pencarian saat ini masih Nominatim satu hasil; autocomplete POI, bias lokasi, dan reverse geocoding lengkap masih perlu ditingkatkan.
+- Layanan publik peta/routing/geocoding memiliki fair-use/rate limit dan bukan SLA produksi.
 
 ## Teknologi
-- MapLibre GL JS: renderer peta vektor.
-- OpenFreeMap: style/tile peta.
-- OpenStreetMap: data geografis.
-- Valhalla: routing motor/motor scooter.
-- Nominatim (saat ini): pencarian tempat; perlu ditingkatkan.
-- HTML, CSS, JavaScript: frontend statis tanpa proses build.
+- MapLibre GL JS — renderer peta.
+- OpenFreeMap + OpenStreetMap — style/tile/data.
+- Valhalla — routing `motor_scooter`, `motorcycle`, dan `auto`.
+- Nominatim — geocoding pencarian saat ini.
+- HTML, CSS, JavaScript — frontend statis tanpa proses build.
 
-## Pengujian berikutnya
-1. Aktifkan dan verifikasi deployment GitHub Pages.
-2. Periksa pemuatan peta melalui Android dan koneksi seluler.
-3. Tingkatkan pencarian POI: autocomplete, nama gedung/hotel/restoran, alamat, lokasi bias Bali, dan reverse geocoding.
-4. Bandingkan detail bangunan, nama tempat, jalan, dan kualitas rute dengan Google Maps pada area yang sama.
-5. Periksa rute motor di jalan nyata; jangan menganggap hasil routing selalu benar.
-6. Uji GPS perangkat di lapangan.
-7. Setelah frontend disetujui, integrasikan API Go + PostgreSQL/PostGIS dan WebSocket untuk uji dua perangkat.
+## Prioritas setelah uji awal
 
-## Catatan layanan publik
-Jangan memperlakukan endpoint demo sebagai layanan produksi. Sebelum aplikasi dipakai pengguna umum, evaluasi hosting tile/routing/geocoding sendiri atau penyedia dengan kapasitas, ketentuan, dan SLA yang sesuai.
+1. Perbaiki temuan UI/UX dari pengujian HP.
+2. Validasi akurasi POI, bangunan, jalan, dan rute motor terhadap kondisi nyata.
+3. Tingkatkan pencarian tempat menjadi autocomplete dengan pemilihan hasil dan reverse geocoding.
+4. Buat kontrak API untuk order, status perjalanan, driver assignment, dan koordinat.
+5. Implementasikan backend Go + PostgreSQL/PostGIS serta komunikasi real-time untuk uji dua perangkat.
