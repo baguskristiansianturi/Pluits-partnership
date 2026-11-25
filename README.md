@@ -2,74 +2,55 @@
 
 PLUITS Partner adalah aplikasi operasional mitra PLUITS. Aplikasi pelanggan dan aplikasi mitra dipisahkan, sementara data order dan operasional nantinya terhubung melalui backend PLUITS.
 
-> **Status: Frontend prototype 0.1 tersedia; GitHub Pages belum live.** Deployment menunggu aktivasi satu kali di Settings → Pages → Source: GitHub Actions. Backend Go + PostgreSQL belum di-deploy.
+> **Status: Frontend prototype 0.2 tersedia dan GitHub Pages aktif.** UI operasional telah diperbarui dan alur simulasi order dibuat berurutan. Backend Go + PostgreSQL belum di-deploy.
 
 ## Preview aplikasi
 
-Setelah aktivasi Pages dan workflow deployment berhasil, aplikasi tersedia di:
-
 https://baguskristiansianturi.github.io/Pluits-partnership/
 
-## Fokus versi pertama
+## Fokus versi pengujian 0.2
 
-Prioritas pengujian adalah pekerjaan pengemudi dan pengalaman peta, bukan kelengkapan menu administratif.
+Pengujian dimulai dari sisi pelanggan dan diteruskan ke sisi pengemudi dalam satu browser/perangkat:
 
-- Peta vektor interaktif area Bali.
-- Titik jemput dan tujuan.
-- Pencarian tempat dan pemilihan titik langsung pada peta.
-- Perhitungan rute dengan profil motor/motor scooter.
-- Marker posisi perangkat dan simulasi pergerakan pengemudi.
-- Alur simulasi: pesanan dibuat → diterima → tiba di jemput → perjalanan berlangsung → selesai.
-- Layout responsif untuk pengujian melalui HP.
+1. **Pelanggan — buat pesanan:** tentukan lokasi jemput dan tujuan, pilih kendaraan, hitung rute, lalu buat order.
+2. **Pengemudi — order masuk:** pindah otomatis ke tab Pengemudi; order baru tampil pada daftar pekerjaan.
+3. **Terima pesanan:** pengemudi menerima order.
+4. **Menuju penjemputan:** status berubah dan peta menampilkan titik jemput.
+5. **Tiba di penjemputan:** pengemudi mengonfirmasi kedatangan.
+6. **Mulai perjalanan:** marker pengemudi bergerak mengikuti rute.
+7. **Selesaikan pengantaran:** status order menjadi selesai.
+8. **Atur ulang simulasi:** mulai kembali dari awal untuk mengulang tes.
 
-## Teknologi frontend dan peta
+## Fitur frontend
+
+- UI responsif dengan panel operasional, mode Pelanggan/Pengemudi, status pekerjaan, dan progress tahapan.
+- Peta vektor interaktif area Bali menggunakan MapLibre GL JS dan OpenFreeMap.
+- Titik jemput dan tujuan; bisa dipilih dari peta.
+- Pencarian lokasi dengan Nominatim (masih perlu ditingkatkan untuk autocomplete dan ketepatan POI).
+- Perhitungan rute Valhalla dengan costing `motor_scooter`, `motorcycle`, dan `auto`.
+- Estimasi jarak/waktu, GPS perangkat, marker, dan simulasi gerakan pengemudi.
+- Tidak memerlukan proses build; frontend statis di-host melalui GitHub Pages.
+
+## Teknologi dan batasan
 
 - **MapLibre GL JS** sebagai renderer peta.
-- **OpenFreeMap** untuk style/tile peta berbasis OpenStreetMap.
-- **Valhalla** untuk routing, termasuk costing `motor_scooter` dan `motorcycle`.
-- **Nominatim** untuk pencarian tempat.
-- HTML/CSS/JavaScript statis agar dapat langsung di-host GitHub Pages tanpa proses build.
+- **OpenFreeMap / OpenStreetMap** untuk style, tile, dan data geografis.
+- **Valhalla** untuk routing.
+- **Nominatim** untuk pencarian tempat saat ini.
+- **Go + PostgreSQL** tetap menjadi keputusan backend; PostGIS dapat digunakan untuk data geospasial. Tidak menggunakan Supabase.
 
-Layanan publik digunakan untuk prototipe dan pengujian awal saja. Endpoint demo memiliki kebijakan penggunaan wajar dan bukan jaminan layanan produksi. Data jalan dan rute sepeda motor perlu divalidasi di lapangan.
+**Penting:** alur versi ini adalah simulasi frontend satu perangkat. Order, status, dan lokasi pengemudi belum disimpan atau disinkronkan melalui server. Tab Pelanggan dan Pengemudi berbagi state lokal di browser yang sama. Untuk uji dua HP/perangkat secara nyata, perlu backend Go + PostgreSQL/PostGIS dan komunikasi real-time (misalnya WebSocket). GitHub Pages hanya meng-host frontend statis.
 
-## Backend — keputusan tetap
-
-Backend PLUITS menggunakan **Go (Golang) + PostgreSQL**, dengan PostGIS untuk kebutuhan geospasial jika diperlukan. Tidak menggunakan Supabase.
-
-GitHub Pages hanya meng-host frontend statis. Sinkronisasi order dan lokasi dua perangkat memerlukan backend Go yang dapat diakses melalui internet, database PostgreSQL, dan komunikasi real-time (misalnya WebSocket). Tahap ini belum aktif.
-
-## Batasan prototype saat ini
-
-- Status dan order hanya simulasi lokal di browser.
-- Belum ada login atau data akun.
-- Belum ada dispatch sungguhan atau sinkronisasi pelanggan-pengemudi lintas perangkat.
-- Belum ada backend Go/PostgreSQL.
-- GPS berjalan setelah pengguna memberi izin browser.
-- Layanan peta/routing publik dapat membatasi permintaan.
-
-## Status GitHub Pages
-
-Workflow sudah tersedia dan diperbarui. Audit menemukan repository belum mengaktifkan Pages sehingga run pertama gagal pada langkah Configure Pages. Buka [Settings → Pages](https://github.com/baguskristiansianturi/Pluits-partnership/settings/pages), pilih **GitHub Actions** pada Source, lalu jalankan workflow di tab Actions. Detail ada di [status implementasi](docs/APP-STATUS.md).
+Layanan publik peta, geocoding, dan routing ditujukan untuk prototipe/pengujian awal; perhatikan fair-use, rate limit, dan ketiadaan SLA. Data jalan, POI, serta rute motor harus divalidasi di lapangan.
 
 ## Dokumentasi
 
-- [Status implementasi dan rencana pengujian](docs/APP-STATUS.md)
-
-## Pola kerja
-
-Pemilik produk menyampaikan ide dan kebutuhan. Pekerjaan audit repository, desain teknis, implementasi, pengujian, preview, dan dokumentasi ditangani sebagai pekerjaan engineering. Setiap perubahan penting dicatat di repository.
+- [Status implementasi dan panduan pengujian](docs/APP-STATUS.md)
 
 ## Tahap berikutnya
 
-1. Uji peta dan rute motor di Bali melalui HP.
-2. Bandingkan detail peta dan kualitas rute dengan Google Maps.
-3. Perbaiki peta dan alur operasional berdasarkan hasil uji.
+1. Uji alur order dari awal hingga selesai di HP.
+2. Catat masalah UI, peta, pencarian, dan rute.
+3. Tingkatkan pencarian POI (autocomplete, nama gedung/tempat, bias lokasi, reverse geocoding).
 4. Rancang kontrak API dan model data untuk Go + PostgreSQL/PostGIS.
-5. Implementasikan backend dan WebSocket untuk pengujian dua perangkat.
-
-## Struktur awal
-
-- `.github/workflows/pages.yml` — deployment GitHub Pages.
-- `docs/APP-STATUS.md` — status, batasan, dan rencana pengujian.
-- `index.html` — aplikasi frontend.
-- `README.md` — sumber acuan repository.
+5. Implementasikan backend dan WebSocket untuk uji dua perangkat.
