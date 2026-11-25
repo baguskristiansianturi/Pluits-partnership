@@ -2,11 +2,11 @@
 
 PLUITS Partner adalah aplikasi operasional mitra PLUITS. Aplikasi pelanggan dan aplikasi mitra dipisahkan, sementara data order dan operasional nantinya terhubung melalui backend PLUITS.
 
-> **Status: Frontend prototype 0.1 tersedia.** GitHub Pages disiapkan melalui GitHub Actions. Backend Go + PostgreSQL belum di-deploy.
+> **Status: Frontend prototype 0.1 tersedia; GitHub Pages belum live.** Deployment menunggu aktivasi satu kali di Settings → Pages → Source: GitHub Actions. Backend Go + PostgreSQL belum di-deploy.
 
 ## Preview aplikasi
 
-Setelah GitHub Pages aktif dan workflow deployment berhasil, aplikasi tersedia di:
+Setelah aktivasi Pages dan workflow deployment berhasil, aplikasi tersedia di:
 
 https://baguskristiansianturi.github.io/Pluits-partnership/
 
@@ -46,6 +46,10 @@ GitHub Pages hanya meng-host frontend statis. Sinkronisasi order dan lokasi dua 
 - Belum ada backend Go/PostgreSQL.
 - GPS berjalan setelah pengguna memberi izin browser.
 - Layanan peta/routing publik dapat membatasi permintaan.
+
+## Status GitHub Pages
+
+Workflow sudah tersedia dan diperbarui. Audit menemukan repository belum mengaktifkan Pages sehingga run pertama gagal pada langkah Configure Pages. Buka [Settings → Pages](https://github.com/baguskristiansianturi/Pluits-partnership/settings/pages), pilih **GitHub Actions** pada Source, lalu jalankan workflow di tab Actions. Detail ada di [status implementasi](docs/APP-STATUS.md).
 
 ## Dokumentasi
 
