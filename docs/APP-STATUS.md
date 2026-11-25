@@ -40,7 +40,7 @@ Status: implementasi frontend diperbarui di `index.html`.
 - Order pelanggan dibuat: tersedia.
 - Order tampil pada tampilan pengemudi: tersedia dalam state lokal browser.
 - Penerimaan order: tersedia.
-- Perjalanan menuju lokasi jemput: status tersedia; marker berada di lokasi jemput (belum simulasi navigasi jalan terpisah menuju pickup).
+- Perjalanan menuju lokasi jemput: marker dimulai dari posisi simulasi sekitar 1–2 km dari pickup lalu bergerak ke titik jemput melalui garis pendek ilustratif (bukan navigasi jalan sungguhan).
 - Konfirmasi tiba di lokasi jemput: tersedia.
 - Mulai perjalanan dan animasi marker sepanjang rute: tersedia.
 - Selesaikan pengantaran: tersedia.
@@ -49,7 +49,7 @@ Status: implementasi frontend diperbarui di `index.html`.
 
 - Ini **simulasi frontend satu perangkat/browser**, bukan dispatch atau transaksi nyata.
 - Pelanggan dan pengemudi berbagi state lokal; belum ada komunikasi antar dua perangkat.
-- Order dan riwayat belum disimpan di database.
+- Order dan riwayat belum disimpan di database.\n- Gerakan menuju pickup adalah pendekatan garis lurus untuk demonstrasi UI; rute jalan pengemudi menuju pickup belum dihitung terpisah.
 - Belum ada login, akun, validasi identitas, pembayaran, atau notifikasi.
 - Backend tetap menggunakan **Go + PostgreSQL** (PostGIS bila diperlukan); belum di-deploy. Tidak menggunakan Supabase.
 - GitHub Pages hanya untuk frontend statis; backend perlu hosting terpisah agar dapat diuji lintas perangkat.
