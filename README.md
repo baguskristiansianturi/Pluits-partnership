@@ -1,133 +1,71 @@
 # PLUITS Partner
 
-Dokumen ini adalah titik acuan awal proyek PLUITS Partner. Repository ini disiapkan untuk menyimpan arah produk, alur kerja, keputusan awal, dan dokumentasi sebelum implementasi kode serta publikasi GitHub Pages dimulai.
+PLUITS Partner adalah aplikasi operasional mitra PLUITS. Aplikasi pelanggan dan aplikasi mitra dipisahkan, sementara data order dan operasional nantinya terhubung melalui backend PLUITS.
 
-> Status: **Perencanaan awal — belum mulai coding dan belum menyiapkan GitHub Pages.**
+> **Status: Frontend prototype 0.1 tersedia.** GitHub Pages disiapkan melalui GitHub Actions. Backend Go + PostgreSQL belum di-deploy.
 
-## 1. Nama dan posisi produk
+## Preview aplikasi
 
-- Nama aplikasi: **PLUITS Partner**
-- Nama repository yang dituju: `pluits-partner`
-- Nama ekosistem mitra: **PLUITS Partner Network**
-- Nama program kerja sama perusahaan: **PLUITS Partnership**
+Setelah GitHub Pages aktif dan workflow deployment berhasil, aplikasi tersedia di:
 
-PLUITS Partner adalah aplikasi operasional terpisah dari aplikasi utama PLUITS. Aplikasi ini ditujukan bagi mitra yang menjalankan layanan transportasi dan pengantaran, serta operator/perusahaan yang bergabung ke ekosistem PLUITS.
+https://baguskristiansianturi.github.io/Pluits-partnership/
 
-## 2. Tujuan aplikasi
+## Fokus versi pertama
 
-Menyediakan satu aplikasi mitra dengan tampilan dan fitur yang menyesuaikan peran, jenis layanan, organisasi, dan izin akun. Bukan aplikasi terpisah untuk setiap jenis pengemudi.
+Prioritas pengujian adalah pekerjaan pengemudi dan pengalaman peta, bukan kelengkapan menu administratif.
 
-Aplikasi utama PLUITS tetap menjadi tempat pelanggan menggunakan social, marketplace, dan memesan layanan. PLUITS Partner menjadi tempat mitra menjalankan pekerjaan dan mengelola operasionalnya.
+- Peta vektor interaktif area Bali.
+- Titik jemput dan tujuan.
+- Pencarian tempat dan pemilihan titik langsung pada peta.
+- Perhitungan rute dengan profil motor/motor scooter.
+- Marker posisi perangkat dan simulasi pergerakan pengemudi.
+- Alur simulasi: pesanan dibuat → diterima → tiba di jemput → perjalanan berlangsung → selesai.
+- Layout responsif untuk pengujian melalui HP.
 
-## 3. Jenis mitra dan peran
+## Teknologi frontend dan peta
 
-Tahap awal berfokus pada:
+- **MapLibre GL JS** sebagai renderer peta.
+- **OpenFreeMap** untuk style/tile peta berbasis OpenStreetMap.
+- **Valhalla** untuk routing, termasuk costing `motor_scooter` dan `motorcycle`.
+- **Nominatim** untuk pencarian tempat.
+- HTML/CSS/JavaScript statis agar dapat langsung di-host GitHub Pages tanpa proses build.
 
-1. **Driver Ride** — pengemudi sepeda motor untuk layanan perjalanan.
-2. **Driver Car** — pengemudi mobil untuk layanan perjalanan.
-3. **Courier** — mitra kurir/pengantaran.
+Layanan publik digunakan untuk prototipe dan pengujian awal saja. Endpoint demo memiliki kebijakan penggunaan wajar dan bukan jaminan layanan produksi. Data jalan dan rute sepeda motor perlu divalidasi di lapangan.
 
-Fondasi produk juga harus mempertimbangkan ekspansi berikut:
+## Backend — keputusan tetap
 
-4. **Transport Operator** — perusahaan/operator taksi atau transportasi yang memiliki armada dan pengemudi.
-5. **Fleet / Company Manager** — pengelola perusahaan, armada, pengemudi, dan operasional.
-6. **Admin perusahaan** — staf yang diberi kewenangan mengelola operasional sesuai izin.
+Backend PLUITS menggunakan **Go (Golang) + PostgreSQL**, dengan PostGIS untuk kebutuhan geospasial jika diperlukan. Tidak menggunakan Supabase.
 
-Satu akun dapat memiliki lebih dari satu peran jika memenuhi persyaratan dan mendapat otorisasi. Antarmuka dan akses fitur ditentukan oleh role, organisasi, serta permission dari backend.
+GitHub Pages hanya meng-host frontend statis. Sinkronisasi order dan lokasi dua perangkat memerlukan backend Go yang dapat diakses melalui internet, database PostgreSQL, dan komunikasi real-time (misalnya WebSocket). Tahap ini belum aktif.
 
-## 4. Model kemitraan
+## Batasan prototype saat ini
 
-PLUITS Partner perlu mendukung dua jalur utama:
+- Status dan order hanya simulasi lokal di browser.
+- Belum ada login atau data akun.
+- Belum ada dispatch sungguhan atau sinkronisasi pelanggan-pengemudi lintas perangkat.
+- Belum ada backend Go/PostgreSQL.
+- GPS berjalan setelah pengguna memberi izin browser.
+- Layanan peta/routing publik dapat membatasi permintaan.
 
-- **Mitra individu:** orang mendaftar sebagai pengemudi atau kurir secara langsung.
-- **Mitra perusahaan/operator:** perusahaan mendaftar sebagai organisasi, mengelola armada dan pengemudinya, serta menerima pesanan melalui PLUITS.
+## Dokumentasi
 
-Dalam jangka panjang, operator taksi dan perusahaan transportasi—termasuk operator besar seperti Bluebird maupun operator lokal Bali—dapat dipertimbangkan untuk bergabung. Ini merupakan target/kemungkinan kerja sama, **bukan klaim bahwa perusahaan tersebut sudah menjadi mitra resmi**.
+- [Status implementasi dan rencana pengujian](docs/APP-STATUS.md)
 
-Untuk operator yang sudah memiliki sistem sendiri, PLUITS dapat mempertimbangkan integrasi API agar sistem dispatch mereka dapat terhubung tanpa mewajibkan seluruh operasional internal berpindah ke PLUITS.
+## Pola kerja
 
-## 5. Cakupan fungsi operasional
+Pemilik produk menyampaikan ide dan kebutuhan. Pekerjaan audit repository, desain teknis, implementasi, pengujian, preview, dan dokumentasi ditangani sebagai pekerjaan engineering. Setiap perubahan penting dicatat di repository.
 
-Fungsi yang direncanakan untuk dikembangkan secara bertahap:
+## Tahap berikutnya
 
-- Registrasi, verifikasi, dan onboarding mitra.
-- Pemilihan jenis kemitraan dan pengelolaan profil.
-- Status online/offline.
-- Penerimaan, penolakan, dan penugasan order.
-- Informasi penjemputan, tujuan, dan pengantaran.
-- Perubahan status perjalanan/pengiriman.
-- Peta, lokasi, dan navigasi.
-- Riwayat pekerjaan dan pendapatan.
-- Notifikasi operasional.
-- Pengelolaan armada, kendaraan, dan pengemudi untuk organisasi.
-- Pengaturan role dan permission untuk perusahaan.
+1. Uji peta dan rute motor di Bali melalui HP.
+2. Bandingkan detail peta dan kualitas rute dengan Google Maps.
+3. Perbaiki peta dan alur operasional berdasarkan hasil uji.
+4. Rancang kontrak API dan model data untuk Go + PostgreSQL/PostGIS.
+5. Implementasikan backend dan WebSocket untuk pengujian dua perangkat.
 
-Daftar ini adalah arah cakupan, bukan pernyataan bahwa fitur sudah dibangun.
+## Struktur awal
 
-## 6. Arsitektur dan prinsip teknis awal
-
-- PLUITS Partner adalah frontend/aplikasi mitra yang terpisah dari aplikasi konsumen.
-- Keduanya terhubung ke ekosistem backend PLUITS yang sama melalui API dan aturan akses yang jelas.
-- Order, dispatch, identitas, dan status transaksi perlu memiliki sumber data yang konsisten.
-- Backend awal PLUITS direncanakan menggunakan **Go (Golang)** dan **PostgreSQL**. Detail layanan dan skema akan ditetapkan setelah audit kebutuhan dan dokumentasi arsitektur induk.
-- Akses data dan tindakan operasional wajib diverifikasi di backend; pemisahan aplikasi saja bukan pengamanan yang cukup.
-- Arsitektur awal harus modular dan dapat dikembangkan tanpa memaksakan pemisahan microservices sebelum dibutuhkan.
-
-## 7. Peta dan navigasi
-
-Kebutuhan peta perlu mendukung pengalaman yang jelas dan mudah digunakan oleh pengemudi maupun pelanggan.
-
-Rekomendasi awal: **Google Maps Platform** untuk peta, pencarian tempat, rute, dan navigasi. Pemilihan ini merupakan rekomendasi, belum integrasi atau aktivasi layanan.
-
-Komponen yang perlu dievaluasi sesuai kebutuhan:
-
-- Maps SDK untuk tampilan peta.
-- Places API untuk pencarian tempat.
-- Routes API untuk perhitungan rute.
-- Navigation SDK untuk navigasi dalam aplikasi.
-
-Biaya penggunaan harus dikendalikan melalui pembatasan API key, kuota, anggaran, dan monitoring. Mockup serta pengembangan frontend awal tidak perlu mengaktifkan layanan berbayar. Evaluasi alternatif dapat dilakukan jika kebutuhan dan skala berubah.
-
-## 8. Pola kerja proyek
-
-Pemilik produk menyampaikan ide dan kebutuhan menggunakan prompt/bahasa sehari-hari. Asisten bertanggung jawab menerjemahkan arahan menjadi pekerjaan teknis, dengan alur:
-
-1. Memahami kebutuhan dan mengklarifikasi hal penting bila diperlukan.
-2. Mengaudit repository, dokumentasi, design system, aset, dan keputusan yang sudah ada.
-3. Menyusun spesifikasi dan alur sebelum implementasi.
-4. Mengerjakan kode, struktur, dan integrasi.
-5. Menguji hasil dan memperbaiki masalah.
-6. Menyediakan preview yang dapat diuji melalui browser/perangkat.
-7. Mencatat perubahan, hasil pengujian, dan status pekerjaan.
-
-Pemilik produk tidak diwajibkan menulis kode atau melakukan pekerjaan engineering. Tindakan yang memang memerlukan otorisasi pemilik akun—misalnya persetujuan akses, billing, atau kredensial rahasia—akan dijelaskan dan dipandu secara bertahap.
-
-## 9. Tahapan sebelum coding
-
-Urutan kerja yang disepakati:
-
-1. Menetapkan nama dan identitas repository.
-2. Menyimpan dokumen arah produk dan alur kerja ini.
-3. Mengaudit kebutuhan, struktur dokumentasi, dan rancangan UI/UX.
-4. Menyepakati alur utama Driver Ride, Driver Car, dan Courier.
-5. Menyiapkan mockup dan spesifikasi frontend.
-6. Baru memulai implementasi frontend secara bertahap.
-7. Menyiapkan GitHub Pages/preview setelah struktur dan kebutuhan awal siap.
-
-**Belum ada persetujuan untuk langsung memulai coding atau menerbitkan GitHub Pages pada tahap dokumen ini.**
-
-## 10. Batasan dan keputusan yang belum final
-
-- Desain visual final belum disetujui.
-- Detail persyaratan verifikasi mitra dan perusahaan belum ditetapkan.
-- Tarif, komisi, pembayaran, settlement, dan kebijakan pembatalan belum ditetapkan.
-- Integrasi resmi dengan perusahaan taksi belum ada dan tidak boleh diasumsikan.
-- Pilihan final layanan peta dan estimasi biaya perlu diverifikasi sebelum integrasi produksi.
-- Detail API, database, keamanan, dan deployment harus mengikuti audit arsitektur PLUITS induk.
-
-## 11. Cara melanjutkan di chat baru
-
-Jika melanjutkan proyek di percakapan baru, minta asisten membaca README ini terlebih dahulu, kemudian memeriksa kondisi repository terbaru. Gunakan dokumen ini sebagai konteks awal, bukan alasan untuk menganggap fitur sudah dibuat. Lanjutkan dari tahap perencanaan yang belum selesai dan jangan mulai coding atau menerbitkan GitHub Pages sebelum tahap persiapan diselesaikan.
-
----
-Dokumen awal PLUITS Partner. Perbarui dokumen ini ketika keputusan produk berubah agar repository tetap menjadi sumber acuan proyek.
+- `.github/workflows/pages.yml` — deployment GitHub Pages.
+- `docs/APP-STATUS.md` — status, batasan, dan rencana pengujian.
+- `index.html` — aplikasi frontend.
+- `README.md` — sumber acuan repository.
