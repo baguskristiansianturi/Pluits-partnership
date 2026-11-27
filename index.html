@@ -90,6 +90,95 @@ html,body{background:#fff}
 .app-shell .toast{position:fixed;left:14px;right:14px;bottom:calc(75px + env(safe-area-inset-bottom));max-width:620px;margin:auto;z-index:150}
 @media(min-width:761px){.bottom-nav{left:50%;right:auto;width:min(760px,100%);transform:translateX(-50%);padding-left:24px;padding-right:24px}.app-shell .map-area{height:360px}.app-shell .content{padding-left:24px;padding-right:24px}}
 @media(max-width:600px){.app-shell{padding-bottom:calc(75px + env(safe-area-inset-bottom))}.app-shell .appbar{height:56px}.app-shell .map-area{height:33vh;min-height:220px;max-height:330px}.app-shell .content{padding:16px 14px 25px}.app-shell .nav-panel{min-height:calc(100dvh - 330px);padding:20px 15px 30px}.app-shell.status-active{padding-bottom:calc(75px + env(safe-area-inset-bottom))}.app-shell.status-active .appbar{flex:0 0 56px}.app-shell.status-active .map-area{flex:0 0 30vh;height:30vh;min-height:185px;max-height:270px}}
+
+/* PLUITS Trans customer-facing home and service hub */
+.app-shell{max-width:560px;margin:0 auto;min-height:100dvh;background:#fff;box-shadow:0 10px 55px #143d3510;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+.appbar{position:sticky;top:0;height:60px;padding:0 16px;z-index:20;box-shadow:0 1px 0 #edf1ef}
+.app-logo{border-radius:12px;background:#e8f7f4;color:var(--teal)}
+.app-title{font-size:17px}
+.membership-chip{border:1px solid #e4eeeb;background:#f7fbfa;color:#287d75;border-radius:20px;padding:7px 11px;font-size:11px;font-weight:750;margin-left:auto}
+.app-help{margin-left:0}
+.map-area{height:188px;border:0;overflow:hidden}
+.map-area .map-top-pill{left:12px;top:12px}
+.map-eta,.driver-count-pill,.radius-legend{display:none!important}
+.map-location{bottom:12px;right:12px}
+.map-area:after{content:"Peta sekitar";position:absolute;bottom:12px;left:13px;z-index:3;background:#fff;border:1px solid #e8eeeb;border-radius:20px;padding:7px 10px;font-size:10px;font-weight:750;color:#536a6a;pointer-events:none}
+.home-screen{display:block;background:#fff;padding:17px 15px 25px}
+.home-location{display:flex;align-items:center;gap:7px;color:#6b7d7f;font-size:11px;margin-bottom:13px}
+.home-location strong{color:#233c40;font-size:12px}
+.home-search{display:flex;align-items:center;gap:10px;width:100%;padding:13px 14px;border:1px solid #e7eeeb;border-radius:15px;background:#f8fbfa;color:#77898b;text-align:left;font-size:12px;box-shadow:0 3px 12px #163b3505}
+.home-search .search-glass{font-size:18px;color:#258d82}
+.home-section{margin-top:23px}
+.home-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.home-section-head h2{font-size:16px;letter-spacing:-.03em;margin:0;font-weight:850}
+.home-section-head button{border:0;background:transparent;color:#148d82;font-size:11px;font-weight:750;padding:4px}
+.service-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px 8px}
+.service-tile{border:0;background:transparent;padding:0;text-align:center;color:#263e42;min-width:0}
+.service-icon{width:54px;height:51px;margin:0 auto 7px;border-radius:17px;display:grid;place-items:center;font-size:24px;background:#f0f8f6}
+.service-tile:nth-child(4n+2) .service-icon{background:#fff5e9}
+.service-tile:nth-child(4n+3) .service-icon{background:#f1f3ff}
+.service-tile:nth-child(4n+4) .service-icon{background:#fdf0f3}
+.service-tile b{display:block;font-size:10px;line-height:1.25;font-weight:750;overflow-wrap:anywhere}
+.service-tile small{display:block;color:#849294;font-size:9px;margin-top:3px}
+.home-promo{display:grid;grid-template-columns:1fr 98px;gap:10px;align-items:center;border-radius:19px;padding:16px;background:linear-gradient(120deg,#e8f8f4,#f2fbf8);overflow:hidden}
+.home-promo .promo-kicker{font-size:9px;letter-spacing:.08em;text-transform:uppercase;font-weight:850;color:#39877e}
+.home-promo h3{font-size:17px;line-height:1.15;letter-spacing:-.04em;margin:6px 0}
+.home-promo p{font-size:10px;line-height:1.45;color:#6b8180;margin:0 0 11px}
+.promo-button{border:0;background:#087f75;color:white;border-radius:11px;padding:9px 12px;font-size:10px;font-weight:800}
+.promo-art{height:91px;border-radius:17px;background:#d1eee6;display:grid;place-items:center;font-size:54px;transform:rotate(3deg)}
+.home-place-card{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid #edf1ef;border-radius:15px;margin-top:9px}
+.place-emoji{width:43px;height:43px;border-radius:13px;background:#f6f4ef;display:grid;place-items:center;font-size:23px;flex-shrink:0}
+.home-place-card .place-info{flex:1;min-width:0}
+.home-place-card b{display:block;font-size:12px}
+.home-place-card small{display:block;color:#839091;font-size:10px;margin-top:4px}
+.place-action{border:1px solid #dfeae7;background:#fff;color:#17877d;border-radius:10px;padding:8px 10px;font-size:10px;font-weight:800}
+.home-footer-note{font-size:9px;color:#9aa5a4;text-align:center;margin:20px 0 4px}
+.nav-panel{padding:19px 15px 30px;min-height:calc(100dvh - 300px)}
+.nav-panel.show{display:block}
+.nav-panel h2{font-size:22px;letter-spacing:-.045em;margin:5px 0 7px}
+.nav-panel-kicker{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#158d82;font-weight:850;margin:0}
+.panel-description{font-size:11px;line-height:1.5;color:#7b8a8c;margin:0 0 17px}
+.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:17px}
+.quick-grid .service-tile{border:1px solid #edf1ef;border-radius:15px;padding:13px 5px 12px}
+.quick-grid .service-icon{width:44px;height:43px;border-radius:14px;font-size:21px}
+.service-page{padding:18px 15px 25px}
+.service-back{border:0;background:transparent;color:#138a80;font-size:11px;font-weight:800;padding:0;margin-bottom:16px}
+.service-page h1{font-size:23px;letter-spacing:-.045em;margin:0 0 6px}
+.service-page .service-lead{font-size:11px;line-height:1.5;color:#7b8a8c;margin:0 0 18px}
+.service-banner{border-radius:18px;background:linear-gradient(120deg,#e9f8f4,#f6fbf9);padding:16px;display:flex;align-items:center;justify-content:space-between;margin:14px 0}
+.service-banner b{font-size:13px}.service-banner small{display:block;font-size:10px;color:#7a8c8c;margin-top:5px}
+.store-card{border:1px solid #edf1ef;border-radius:17px;padding:11px;display:flex;gap:11px;align-items:center;margin:10px 0}
+.store-art{width:65px;height:65px;border-radius:14px;background:#f7eee4;display:grid;place-items:center;font-size:31px;flex-shrink:0}
+.store-info{flex:1;min-width:0}.store-info b{display:block;font-size:12px}.store-info small{display:block;color:#839091;font-size:10px;line-height:1.4;margin-top:5px}
+.store-info .price{color:#188b80;font-weight:850;font-size:11px;margin-top:6px}
+.add-item{border:0;border-radius:11px;background:#e8f7f3;color:#12877c;font-size:11px;font-weight:900;padding:9px 12px}
+.cart-bar{position:sticky;bottom:calc(74px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;background:#173d3e;color:white;border-radius:15px;padding:13px 15px;margin:17px 0 0;box-shadow:0 8px 25px #153a3525}
+.cart-bar small{display:block;color:#c4dfda;font-size:10px;margin-top:3px}.cart-bar button{border:0;background:#fff;color:#176e66;border-radius:10px;padding:9px 12px;font-size:10px;font-weight:850}
+.checkout-box{background:#f7faf9;border:1px solid #e7eeeb;border-radius:17px;padding:14px;margin-top:14px}
+.checkout-box label{display:block;font-size:10px;color:#657a7b;font-weight:750;margin:10px 0 5px}
+.checkout-box input,.checkout-box select{width:100%;border:1px solid #e1eae6;border-radius:11px;background:#fff;padding:11px;font-size:12px;color:#263d40}
+.primary-wide{width:100%;border:0;border-radius:13px;background:#078c80;color:#fff;font-size:12px;font-weight:850;padding:13px;margin-top:13px}
+.order-card{border:1px solid #e9efec;border-radius:16px;padding:14px;margin:10px 0}
+.order-status{display:inline-block;border-radius:20px;background:#e8f7f3;color:#15877c;font-size:9px;font-weight:850;padding:5px 9px;margin-bottom:8px}
+.message-row{display:flex;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid #edf1ef}
+.message-avatar{width:44px;height:44px;border-radius:15px;background:#eaf7f4;display:grid;place-items:center;font-size:21px;flex-shrink:0}
+.message-row b{font-size:12px}.message-row small{display:block;font-size:10px;color:#839091;margin-top:4px}
+.profile-hero{display:flex;align-items:center;gap:12px;background:#f5faf8;border-radius:18px;padding:16px;margin:15px 0}
+.profile-avatar{width:52px;height:52px;border-radius:18px;background:#dcefe9;color:#16877c;display:grid;place-items:center;font-size:23px;font-weight:900}
+.profile-hero b{font-size:14px}.profile-hero small{display:block;color:#7a8c8c;font-size:10px;margin-top:4px}
+.membership-card{border-radius:18px;background:linear-gradient(125deg,#173c3d,#245e58);color:#fff;padding:17px;margin:13px 0}
+.membership-card .member-logo{background:#d6f1e9;color:#087d73}
+.membership-card small{color:#c5dcd6;line-height:1.5}
+.panel-row{cursor:pointer}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,560px);height:calc(65px + env(safe-area-inset-bottom));padding:7px 6px calc(7px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e8eeeb;z-index:50;display:grid;grid-template-columns:repeat(5,1fr);box-shadow:0 -6px 20px #173a3507}
+.nav-item{display:flex;align-items:center;justify-content:center;gap:3px}
+.nav-item .nav-icon{font-size:20px}.nav-item small{font-size:9px}
+.nav-quick .quick-icon{width:39px;height:34px;border-radius:12px;background:#078c80;color:#fff;font-size:27px;line-height:30px}
+.nav-quick{margin-top:-13px}
+.brand-nav .nav-brand{width:27px;height:27px;border-radius:9px;background:#e4f5f0;color:#078c80}
+@media(min-width:560px){.app-shell{border-left:1px solid #eef2f0;border-right:1px solid #eef2f0}.bottom-nav{border-left:1px solid #eef2f0;border-right:1px solid #eef2f0}}
+@media(max-width:360px){.service-grid{gap:12px 5px}.service-icon{width:48px;height:47px}.home-screen{padding-left:12px;padding-right:12px}.home-promo{grid-template-columns:1fr 76px}.promo-art{height:78px;font-size:44px}}
+
 </style>
 </head>
 <body>
@@ -97,8 +186,29 @@ html,body{background:#fff}
 <header class="appbar"><button class="app-logo brand-home" data-nav="home" aria-label="PLUITS Trans">p</button><div class="app-title">PLUITS <span>Trans</span></div><button class="membership-chip" data-nav="profile" aria-label="PLUITS Membership">Membership</button><button class="app-help" id="help" aria-label="Bantuan">?</button></header>
 
 <div class="map-area"><div id="map"></div><div class="map-loading" id="mapLoading">Memuat peta…</div><div class="map-top-pill"><i></i><span id="mapCaption">Peta lokasi perjalanan</span></div><div class="map-eta" id="mapEta"><small>ESTIMASI TIBA</small><span id="mapEtaValue">Mencari driver</span></div><div class="driver-count-pill" id="driverCountPill"><i></i><span>8 driver di sekitar</span></div><div class="radius-legend" id="radiusLegend">Radius 1,5 km</div><div class="map-hint" id="mapHint"></div><button class="map-location" id="locate" aria-label="Gunakan lokasi saya">◎</button></div>
+<main class="home-screen" id="homeScreen">
+<div class="home-location"><span>⌖</span><div><small>Lokasi kamu</small><br><strong>Bali, Indonesia</strong></div><span style="margin-left:auto;color:#16877c;font-weight:800">⌄</span></div>
+<button class="home-search" data-nav="quick"><span class="search-glass">⌕</span><span>Pesan perjalanan, kopi, makanan, dan lainnya</span></button>
+<section class="home-section"><div class="home-section-head"><h2>Apa yang ingin kamu lakukan?</h2><button data-nav="quick">Semua layanan</button></div>
+<div class="service-grid">
+<button class="service-tile" data-service="ride"><span class="service-icon">🛵</span><b>Motor</b><small>Ride</small></button>
+<button class="service-tile" data-service="car"><span class="service-icon">🚘</span><b>Mobil</b><small>Ride</small></button>
+<button class="service-tile" data-service="food"><span class="service-icon">🍜</span><b>Makanan</b><small>Food</small></button>
+<button class="service-tile" data-service="coffee"><span class="service-icon">☕</span><b>Kopi</b><small>Coffee</small></button>
+<button class="service-tile" data-service="courier"><span class="service-icon">📦</span><b>Kurir</b><small>Delivery</small></button>
+<button class="service-tile" data-service="parcel"><span class="service-icon">🛍️</span><b>Antar barang</b><small>Send</small></button>
+<button class="service-tile" data-service="groceries"><span class="service-icon">🧺</span><b>Belanja</b><small>Market</small></button>
+<button class="service-tile" data-service="tickets"><span class="service-icon">🎟️</span><b>Tiket</b><small>Explore</small></button>
+</div></section>
+<section class="home-section"><div class="home-promo"><div><div class="promo-kicker">Ngopi sebentar?</div><h3>Kopi favorit,<br>diantar ke kamu.</h3><p>Jelajahi minuman dan camilan di sekitar.</p><button class="promo-button" data-service="coffee">Pesan kopi</button></div><div class="promo-art">☕</div></div></section>
+<section class="home-section"><div class="home-section-head"><h2>Jelajahi PLUITS</h2><button data-nav="quick">Lihat semua</button></div>
+<div class="home-place-card"><div class="place-emoji">🍽️</div><div class="place-info"><b>Restoran & kafe</b><small>Temukan menu dan tempat makan</small></div><button class="place-action" data-service="food">Jelajahi</button></div>
+<div class="home-place-card"><div class="place-emoji">🧭</div><div class="place-info"><b>Perjalanan & wisata</b><small>Transportasi, tiket, dan akomodasi</small></div><button class="place-action" data-service="travel">Buka</button></div>
+<div class="home-place-card"><div class="place-emoji">🚚</div><div class="place-info"><b>Antar jemput & pengiriman</b><small>Pesan kendaraan atau kirim barang</small></div><button class="place-action" data-service="courier">Pesan</button></div>
+</section><p class="home-footer-note">PLUITS Trans · Satu aplikasi untuk perjalanan dan layanan harian</p>
+</main>
 <section class="nav-panel" id="navPanel" aria-live="polite"></section>
-<div class="booking-screen" id="bookingScreen">
+<div class="booking-screen hide" id="bookingScreen">
 <div class="content">
 <div class="booking-step active" id="locationStep">
 <div class="section-kicker">Perjalanan</div><h1 class="heading">Mau pergi ke mana?</h1><p class="subheading">Tentukan lokasi jemput dan tujuan perjalananmu.</p>
@@ -328,25 +438,42 @@ $('restart').addEventListener('click',()=>{cancelTrip();['pickup','destination']
 $('help').addEventListener('click',()=>notify('Bantuan PLUITS Trans akan tersedia di pusat bantuan.'));
 document.addEventListener('click',e=>{if(!e.target.closest('.locations')&&!e.target.closest('.suggestions'))$('suggestions').classList.remove('show')});
 
-const navPanel=$('navPanel');
+const navPanel=$('navPanel'),homeScreen=$('homeScreen'),bookingScreen=$('bookingScreen'),mapArea=document.querySelector('.map-area');
+let activePage='home',cartItems=[],localOrders=[];
+const serviceMeta={
+ ride:['Motor','Perjalanan motor yang praktis','🛵'],car:['Mobil','Perjalanan nyaman bersama','🚘'],food:['Makanan','Pilih makanan dari restoran','🍜'],coffee:['Kopi & minuman','Kopi, teh, dan camilan','☕'],courier:['Kurir','Kirim barang ke tujuan','📦'],parcel:['Antar barang','Paket dan barang personal','🛍️'],groceries:['Belanja harian','Kebutuhan rumah dan groceries','🧺'],tickets:['Tiket & aktivitas','Temukan pengalaman dan tiket','🎟️'],travel:['Jelajahi perjalanan','Transportasi, tiket, dan akomodasi','🧭']
+};
 function setNavActive(page){document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.nav===page));}
+function goRide(service='ride'){activePage='ride';homeScreen.classList.add('hide');navPanel.classList.remove('show');bookingScreen.classList.remove('hide');mapArea.style.display='block';document.querySelector('.map-eta').style.display='';setNavActive('home');if(service==='car'){vehicle='car-standard';document.querySelectorAll('[data-vehicle]').forEach(x=>x.classList.toggle('selected',x.dataset.vehicle===vehicle));}map?.resize();window.scrollTo({top:0,behavior:'smooth'});}
+function serviceTile(key){const m=serviceMeta[key]||serviceMeta.ride;return '<button class="service-tile" data-service="'+key+'"><span class="service-icon">'+m[2]+'</span><b>'+m[0]+'</b><small>'+({ride:'Motor',car:'Mobil',food:'Food',coffee:'Coffee',courier:'Delivery',parcel:'Send',groceries:'Market',tickets:'Explore',travel:'Travel'}[key]||'PLUITS')+'</small></button>';}
+function showQuick(){activePage='quick';homeScreen.classList.add('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';navPanel.classList.add('show');setNavActive('quick');navPanel.innerHTML='<p class="nav-panel-kicker">PLUITS Trans</p><h2>Pilih layanan</h2><p class="panel-description">Semua kebutuhan perjalanan dan layanan harian, dalam satu tempat.</p><div class="quick-grid">'+Object.keys(serviceMeta).map(serviceTile).join('')+'</div><div class="service-banner"><div><b>Butuh bantuan memilih?</b><small>Pilih layanan, lalu ikuti langkah pemesanan.</small></div><span style="font-size:30px">✨</span></div>';window.scrollTo({top:0,behavior:'smooth'});}
+function renderStore(type){
+ const coffee=type==='coffee',food=type==='food',grocery=type==='groceries',parcel=type==='parcel';
+ const title=coffee?'Kopi & minuman':food?'Makanan & restoran':grocery?'Belanja harian':'Kirim barang';
+ const intro=coffee?'Temukan kopi, teh, dan camilan untuk menemani harimu.':food?'Jelajahi pilihan makanan dan restoran.':grocery?'Pilih kebutuhan sehari-hari.':'Atur pengiriman barang dengan mudah.';
+ const products=coffee?[['☕','Kopi susu gula aren','Kopi creamy dengan gula aren','Rp22.000'],['🧋','Es kopi latte','Espresso dan susu dingin','Rp25.000'],['🥐','Croissant butter','Camilan hangat','Rp18.000'],['🍵','Matcha latte','Matcha dan susu','Rp27.000']]:food?[['🍜','Mie ayam','Menu favorit untuk makan siang','Rp28.000'],['🍛','Nasi ayam','Nasi dengan lauk pilihan','Rp32.000'],['🥗','Salad segar','Pilihan ringan','Rp29.000'],['🍰','Kue hari ini','Camilan manis','Rp20.000']]:grocery?[['🥛','Susu segar','Produk kebutuhan harian','Rp18.000'],['🍞','Roti tawar','Untuk sarapan','Rp16.000'],['🍎','Buah pilihan','Buah segar','Rp24.000'],['🧴','Kebutuhan rumah','Produk rumah tangga','Rp35.000']]:[['📦','Paket kecil','Dokumen atau barang kecil','Mulai Rp12.000'],['🛍️','Barang belanja','Paket belanja personal','Mulai Rp15.000'],['🎁','Paket hadiah','Barang berkemasan','Mulai Rp18.000']];
+ activePage=type;homeScreen.classList.add('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';navPanel.classList.add('show');setNavActive('quick');
+ navPanel.innerHTML='<div class="service-page"><button class="service-back" data-nav="home">‹ Beranda</button><p class="nav-panel-kicker">PLUITS '+(coffee?'Coffee':food?'Food':grocery?'Market':'Delivery')+'</p><h1>'+title+'</h1><p class="service-lead">'+intro+'</p><div class="service-banner"><div><b>'+ (coffee?'Waktunya ngopi ☕':food?'Lagi lapar? 🍽️':grocery?'Isi kebutuhanmu 🧺':'Kirim hari ini 📦')+'</b><small>Alur pemesanan front-end untuk pengujian</small></div><span style="font-size:30px">'+(coffee?'☕':food?'🍲':grocery?'🧺':'🚚')+'</span></div><h3 style="font-size:14px;margin:20px 0 10px">'+(parcel?'Jenis pengiriman':'Pilihan untukmu')+'</h3>'+products.map((p,i)=>'<div class="store-card"><div class="store-art">'+p[0]+'</div><div class="store-info"><b>'+p[1]+'</b><small>'+p[2]+'</small><div class="price">'+p[3]+'</div></div><button class="add-item" data-add="'+type+'|'+i+'">＋</button></div>').join('')+'<div id="cartArea">'+renderCart()+'</div></div>';
+}
+function renderCart(){if(!cartItems.length)return '';const count=cartItems.reduce((n,x)=>n+x.qty,0),sum=cartItems.reduce((n,x)=>n+x.qty*x.price,0);return '<div class="cart-bar"><div><b>'+count+' item di keranjang</b><small>Rp'+sum.toLocaleString('id-ID')+'</small></div><button data-checkout>Periksa</button></div>';}
+function showCheckout(){const area=$('cartArea');if(!area)return;area.innerHTML=renderCart()+'<div class="checkout-box"><b style="font-size:13px">Detail pengantaran</b><label>Alamat penerima</label><input id="checkoutAddress" placeholder="Masukkan alamat pengantaran"><label>Catatan</label><input id="checkoutNote" placeholder="Catatan untuk mitra (opsional)"><label>Metode pembayaran</label><select id="checkoutPay"><option>Bayar tunai</option><option>PLUITS Wallet (pratinjau)</option></select><button class="primary-wide" data-place-order>Konfirmasi pesanan</button><small style="display:block;color:#8a989b;font-size:9px;margin-top:8px">Pesanan hanya disimpan sementara di tampilan ini. Belum dikirim ke merchant.</small></div>';}
+function placeLocalOrder(){const address=$('checkoutAddress')?.value.trim();if(!address){notify('Isi alamat pengantaran terlebih dahulu');return;}const total=cartItems.reduce((n,x)=>n+x.qty*x.price,0);localOrders.unshift({id:'PT-'+String(Date.now()).slice(-6),items:cartItems.map(x=>({...x})),total,address,status:'Menunggu konfirmasi (pratinjau)',type:activePage});cartItems=[];renderTrips();navPanel.innerHTML='<div class="service-page"><p class="nav-panel-kicker">Pesanan dibuat</p><h1>Pesananmu siap ditinjau</h1><p class="service-lead">Ini hanya simulasi antarmuka. Pesanan belum dikirim ke toko atau mitra.</p><div class="order-card"><span class="order-status">Pratinjau</span><b>'+localOrders[0].id+'</b><p style="font-size:11px;color:#77898b">Total Rp'+total.toLocaleString('id-ID')+' · '+esc(address)+'</p></div><button class="primary-wide" data-nav="trips">Lihat transaksi</button><button class="primary-wide" style="background:#edf8f5;color:#167d73" data-nav="home">Kembali ke beranda</button></div>';notify('Pratinjau pesanan dibuat');}
+function renderTrips(){if(!localOrders.length)return '<p class="nav-panel-kicker">Aktivitas</p><h2>Transaksi</h2><p class="panel-description">Pesanan perjalanan, makanan, dan pengirimanmu akan berkumpul di sini.</p><div class="empty-state"><div class="empty-icon">▤</div><b>Belum ada transaksi</b><p>Mulai pesan layanan PLUITS Trans. Pesanan pratinjau akan tampil di sini.</p></div>';return '<p class="nav-panel-kicker">Aktivitas</p><h2>Transaksi</h2><p class="panel-description">Riwayat pesanan dalam sesi prototipe ini.</p>'+localOrders.map(o=>'<div class="order-card"><span class="order-status">'+o.status+'</span><b>'+o.id+'</b><p style="font-size:10px;color:#7b8a8c">'+o.items.length+' jenis item · Rp'+o.total.toLocaleString('id-ID')+'</p><small style="font-size:10px;color:#839091">'+esc(o.address)+'</small></div>').join('');}
 function showNavPage(page){
-  if(page==='home'||page==='quick'){
-    navPanel.classList.remove('show');$('bookingScreen').classList.remove('hide');setNavActive(page==='quick'?'quick':'home');
-    if(page==='quick'){window.scrollTo({top:0,behavior:'smooth'});notify('Tentukan lokasi jemput dan tujuan untuk mulai memesan.');}
-    return;
-  }
-  $('bookingScreen').classList.add('hide');navPanel.classList.add('show');setNavActive(page);
-  if(page==='trips'){
-    navPanel.innerHTML='<p class="nav-panel-kicker">Aktivitas</p><h2>Transaksi berjalan</h2><p class="panel-description">Pantau perjalanan atau pengantaran yang sedang berlangsung.</p><div class="empty-state"><div class="empty-icon">▤</div><b>Belum ada transaksi aktif</b><p>Pesanan yang sedang berjalan akan tampil di bagian ini setelah alur pemesanan terhubung.</p></div>';
-  }else if(page==='messages'){
-    navPanel.innerHTML='<p class="nav-panel-kicker">Komunikasi</p><h2>Pesan</h2><p class="panel-description">Percakapan terkait perjalanan dan pengantaran.</p><div class="empty-state"><div class="empty-icon">▢</div><b>Belum ada pesan</b><p>Pesan dari mitra atau driver akan tersedia di sini ketika layanan pesan aktif.</p></div>';
-  }else if(page==='profile'){
-    navPanel.innerHTML='<p class="nav-panel-kicker">Akun</p><h2>Profil & Membership</h2><p class="panel-description">Identitas akun dan keanggotaan di ekosistem PLUITS.</p><div class="membership-card"><div class="member-logo">p</div><b>PLUITS Membership</b><small>Keanggotaan terhubung dengan akun PLUITS. Pada prototipe ini, autentikasi dan sinkronisasi akun belum aktif.</small></div><div class="panel-row"><span class="panel-row-icon">◉</span><div><b>Profil pengguna</b><small>Informasi profil akan mengikuti akun PLUITS.</small></div></div><div class="panel-row"><span class="panel-row-icon">◇</span><div><b>Status keanggotaan</b><small>Belum terhubung ke sistem akun.</small></div></div>';
-  }
+ if(page==='home'){activePage='home';homeScreen.classList.remove('hide');bookingScreen.classList.add('hide');navPanel.classList.remove('show');mapArea.style.display='block';setNavActive('home');map?.resize();window.scrollTo({top:0,behavior:'smooth'});return;}
+ if(page==='quick'){showQuick();return;}
+ homeScreen.classList.add('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';navPanel.classList.add('show');setNavActive(page);activePage=page;
+ if(page==='trips'){navPanel.innerHTML=renderTrips();}
+ else if(page==='messages'){navPanel.innerHTML='<p class="nav-panel-kicker">Komunikasi</p><h2>Pesan</h2><p class="panel-description">Percakapan dengan mitra perjalanan, restoran, dan kurir.</p><div class="message-row"><div class="message-avatar">🛵</div><div><b>PLUITS Trans Support</b><small>Informasi bantuan dan layanan</small></div></div><div class="empty-state"><div class="empty-icon">◌</div><b>Belum ada percakapan</b><p>Chat dengan mitra akan muncul setelah layanan pesan terhubung.</p></div>';}
+ else if(page==='profile'){navPanel.innerHTML='<p class="nav-panel-kicker">Akun PLUITS</p><h2>Profil & Membership</h2><p class="panel-description">Satu identitas untuk layanan PLUITS.</p><div class="profile-hero"><div class="profile-avatar">p</div><div><b>Pengguna PLUITS</b><small>Masuk untuk menghubungkan akun</small></div></div><div class="membership-card"><div class="member-logo">p</div><b>PLUITS Membership</b><small>Membership akan terhubung dengan akun utama ketika autentikasi tersedia.</small></div><div class="panel-row"><span class="panel-row-icon">◉</span><div><b>Data profil</b><small>Nama, foto, dan informasi akun</small></div></div><div class="panel-row"><span class="panel-row-icon">◇</span><div><b>Membership</b><small>Status keanggotaan dan manfaat</small></div></div><div class="panel-row"><span class="panel-row-icon">⚙</span><div><b>Pengaturan</b><small>Preferensi dan privasi</small></div></div>';}
 }
 document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>showNavPage(b.dataset.nav)));
-
-initMap();updateSaveUI('pickup');updateSaveUI('destination');clearFare();
+document.addEventListener('click',e=>{
+ const service=e.target.closest('[data-service]');if(service){const k=service.dataset.service;if(k==='ride'||k==='car')goRide(k);else if(k==='coffee'||k==='food'||k==='groceries'||k==='parcel')renderStore(k);else{showQuick();}return;}
+ const add=e.target.closest('[data-add]');if(add){const [type,idx]=add.dataset.add.split('|');const coffee=type==='coffee',food=type==='food',grocery=type==='groceries';const lists={coffee:[['Kopi susu gula aren',22000],['Es kopi latte',25000],['Croissant butter',18000],['Matcha latte',27000]],food:[['Mie ayam',28000],['Nasi ayam',32000],['Salad segar',29000],['Kue hari ini',20000]],groceries:[['Susu segar',18000],['Roti tawar',16000],['Buah pilihan',24000],['Kebutuhan rumah',35000]],parcel:[['Paket kecil',12000],['Barang belanja',15000],['Paket hadiah',18000]]};const item=lists[type][Number(idx)];const found=cartItems.find(x=>x.name===item[0]);if(found)found.qty++;else cartItems.push({name:item[0],price:item[1],qty:1});const area=$('cartArea');if(area)area.innerHTML=renderCart();notify(item[0]+' ditambahkan');return;}
+ if(e.target.closest('[data-checkout]')){showCheckout();return;}
+ if(e.target.closest('[data-place-order]')){placeLocalOrder();return;}
+});
+initMap();updateSaveUI('pickup');updateSaveUI('destination');clearFare();homeScreen.classList.remove('hide');bookingScreen.classList.add('hide');mapArea.style.display='block';setNavActive('home');
 </script>
 </body></html>
