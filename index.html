@@ -53,7 +53,7 @@ html,body{background:#fff}
 .app-shell .appbar{position:sticky;top:0;height:58px;padding:0 14px;z-index:30;border-bottom:1px solid #edf1ef}
 .app-shell .app-logo{border:0;flex:none}
 .brand-home{cursor:pointer}
-.membership-chip{margin-left:auto;border:1px solid #dceee9;background:#f1faf7;color:#087e76;border-radius:999px;padding:6px 9px;font-size:9px;font-weight:800;letter-spacing:.02em}
+.membership-chip{cursor:pointer;margin-left:auto;border:1px solid #dceee9;background:#f1faf7;color:#087e76;border-radius:999px;padding:6px 9px;font-size:9px;font-weight:800;letter-spacing:.02em}
 .app-shell .app-help{margin-left:0;flex:none}
 .app-shell .map-area{height:clamp(230px,34vh,360px);border-bottom:1px solid #e4ebe8}
 .app-shell .content{max-width:680px;margin:0 auto;padding:18px 16px 26px}
@@ -94,7 +94,7 @@ html,body{background:#fff}
 </head>
 <body>
 <div class="app app-shell">
-<header class="appbar"><button class="app-logo brand-home" data-nav="home" aria-label="PLUITS Trans">p</button><div class="app-title">PLUITS <span>Trans</span></div><span class="membership-chip">Membership</span><button class="app-help" id="help" aria-label="Bantuan">?</button></header>
+<header class="appbar"><button class="app-logo brand-home" data-nav="home" aria-label="PLUITS Trans">p</button><div class="app-title">PLUITS <span>Trans</span></div><button class="membership-chip" data-nav="profile" aria-label="PLUITS Membership">Membership</button><button class="app-help" id="help" aria-label="Bantuan">?</button></header>
 
 <div class="map-area"><div id="map"></div><div class="map-loading" id="mapLoading">Memuat peta…</div><div class="map-top-pill"><i></i><span id="mapCaption">Peta lokasi perjalanan</span></div><div class="map-eta" id="mapEta"><small>ESTIMASI TIBA</small><span id="mapEtaValue">Mencari driver</span></div><div class="driver-count-pill" id="driverCountPill"><i></i><span>8 driver di sekitar</span></div><div class="radius-legend" id="radiusLegend">Radius 1,5 km</div><div class="map-hint" id="mapHint"></div><button class="map-location" id="locate" aria-label="Gunakan lokasi saya">◎</button></div>
 <section class="nav-panel" id="navPanel" aria-live="polite"></section>
@@ -161,7 +161,7 @@ html,body{background:#fff}
 <button class="nav-item brand-nav active" data-nav="home" aria-label="Beranda PLUITS Trans"><span class="nav-brand">p</span><small>Trans</small></button>
 <button class="nav-item" data-nav="trips"><span class="nav-icon">▤</span><small>Transaksi</small></button>
 <button class="nav-item nav-quick" data-nav="quick"><span class="quick-icon">＋</span><small>Pesan</small></button>
-<button class="nav-item" data-nav="messages"><span class="nav-icon">▢</span><small>Pesan</small></button>
+<button class="nav-item" data-nav="messages"><span class="nav-icon">◌</span><small>Chat</small></button>
 <button class="nav-item" data-nav="profile"><span class="nav-icon">◉</span><small>Profil</small></button>
 </nav>
 </div>
