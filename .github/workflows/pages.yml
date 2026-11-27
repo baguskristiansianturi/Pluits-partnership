@@ -1,4 +1,4 @@
-name: Deploy PLUITS Partner to GitHub Pages
+name: Deploy PLUITS Trans to GitHub Pages
 
 on:
   push:

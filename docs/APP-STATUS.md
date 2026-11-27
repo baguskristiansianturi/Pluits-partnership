@@ -1,72 +1,44 @@
-# Status Implementasi PLUITS Partner
+# Status Implementasi PLUITS Trans
 
-Pembaruan: 25 November 2026
+Pembaruan: 28 November 2026
 
-## Status deployment
+## Pemisahan repository
 
-**GitHub Pages aktif dan deployment berhasil.** Workflow terbaru sebelumnya selesai dengan conclusion `success`; URL preview:
+PLUITS Trans kini dipindahkan menjadi proyek frontend mandiri dari `pluits`. Repository ini menjadi sumber utama seluruh pekerjaan PLUITS Trans; fitur transportasi tidak lagi dikembangkan di folder Design Studio repository utama.
 
-https://baguskristiansianturi.github.io/Pluits-partnership/
+## Status aplikasi
 
-Workflow: `.github/workflows/pages.yml` — deploy frontend statis dari root repository ke GitHub Pages.
+- Prototipe frontend untuk pengujian mobile UI/UX.
+- Pencarian lokasi otomatis dengan prioritas Indonesia dan hasil lokal berdasarkan titik jemput/peta.
+- Pin pickup dan destination; hasil pilihan tersimpan otomatis.
+- Peta dan garis rute ditampilkan untuk alur perjalanan.
+- Panel status perjalanan dan simulasi kendaraan tersedia.
 
-## Versi 0.2 — UI operasional dan alur uji order
+## Teknologi yang digunakan
 
-Status: implementasi frontend diperbarui di `index.html`.
+- MapLibre GL JS.
+- Peta raster OpenStreetMap.
+- Photon geocoder.
+- OSRM public demo routing.
+- HTML, CSS, JavaScript statis.
 
-### Perubahan UI
-- Struktur visual diperbarui menjadi operations console dengan header produk, panel peta, panel kerja, hierarki informasi, status, dan tombol aksi yang konsisten.
-- Layout desktop menggunakan peta sebagai area utama dan panel operasional di sisi kanan.
-- Layout mobile menggunakan peta di bagian atas dan panel operasional yang nyaman diakses dari bawah.
-- Mode Pelanggan dan Pengemudi dibuat sebagai dua tampilan operasional yang berbeda dalam prototipe.
-- Progress lima tahap pengemudi ditampilkan agar posisi alur uji mudah dipahami.
-- Peta MapLibre/OpenFreeMap yang sudah ada dipertahankan.
+## Batasan penting
 
-### Alur pengujian yang tersedia
+- Order dan dispatch belum berjalan di backend.
+- Posisi driver bukan GPS real-time; animasi driver adalah simulasi frontend.
+- Tidak ada sinkronisasi lintas perangkat, login, pembayaran, atau penyimpanan server.
+- OSRM public demo dan Photon merupakan layanan publik untuk prototipe; tidak memiliki SLA produksi.
+- Rute dapat gagal atau tidak akurat untuk kendaraan motor/akses lokal; perlu validasi lapangan.
+- GitHub Pages hanya meng-host frontend statis.
 
-1. Buka tab **Pelanggan**.
-2. Periksa titik jemput dan tujuan; ubah melalui pencarian atau tombol pilih titik di peta.
-3. Pilih jenis kendaraan dan tekan **Hitung rute perjalanan**.
-4. Setelah rute tampil, tekan **Buat pesanan sekarang**.
-5. Aplikasi berpindah ke tab **Pengemudi**; periksa order masuk dan detail lokasi.
-6. Tekan **Terima pesanan**.
-7. Tekan **Mulai menuju penjemputan**.
-8. Setelah simulasi tiba, tekan **Konfirmasi tiba di penjemputan**.
-9. Tekan **Mulai perjalanan**; marker bergerak mengikuti geometri rute.
-10. Tekan **Selesaikan pengantaran**; status menjadi selesai.
-11. Gunakan **Atur ulang simulasi** untuk mengulang dari awal.
+## Arsitektur berikutnya
 
-### Status tahapan
-- Order pelanggan dibuat: tersedia.
-- Order tampil pada tampilan pengemudi: tersedia dalam state lokal browser.
-- Penerimaan order: tersedia.
-- Perjalanan menuju lokasi jemput: marker dimulai dari posisi simulasi sekitar 1–2 km dari pickup lalu bergerak ke titik jemput melalui garis pendek ilustratif (bukan navigasi jalan sungguhan).
-- Konfirmasi tiba di lokasi jemput: tersedia.
-- Mulai perjalanan dan animasi marker sepanjang rute: tersedia.
-- Selesaikan pengantaran: tersedia.
+1. Modularisasi Ride, Courier, driver workflow, dan shared map/location.
+2. Backend Go + PostgreSQL/PostGIS.
+3. API order, assignment, status perjalanan, dan driver location.
+4. WebSocket atau mekanisme real-time untuk uji multi-perangkat.
+5. Provider geocoding/routing/traffic yang dapat diandalkan untuk skala produksi.
 
-## Batasan yang harus dipahami saat pengujian
+## Deployment
 
-- Ini **simulasi frontend satu perangkat/browser**, bukan dispatch atau transaksi nyata.
-- Pelanggan dan pengemudi berbagi state lokal; belum ada komunikasi antar dua perangkat.
-- Order dan riwayat belum disimpan di database.\n- Gerakan menuju pickup adalah pendekatan garis lurus untuk demonstrasi UI; rute jalan pengemudi menuju pickup belum dihitung terpisah.
-- Belum ada login, akun, validasi identitas, pembayaran, atau notifikasi.
-- Backend tetap menggunakan **Go + PostgreSQL** (PostGIS bila diperlukan); belum di-deploy. Tidak menggunakan Supabase.
-- GitHub Pages hanya untuk frontend statis; backend perlu hosting terpisah agar dapat diuji lintas perangkat.
-- Pencarian saat ini masih Nominatim satu hasil; autocomplete POI, bias lokasi, dan reverse geocoding lengkap masih perlu ditingkatkan.
-- Layanan publik peta/routing/geocoding memiliki fair-use/rate limit dan bukan SLA produksi.
-
-## Teknologi
-- MapLibre GL JS — renderer peta.
-- OpenFreeMap + OpenStreetMap — style/tile/data.
-- Valhalla — routing `motor_scooter`, `motorcycle`, dan `auto`.
-- Nominatim — geocoding pencarian saat ini.
-- HTML, CSS, JavaScript — frontend statis tanpa proses build.
-
-## Prioritas setelah uji awal
-
-1. Perbaiki temuan UI/UX dari pengujian HP.
-2. Validasi akurasi POI, bangunan, jalan, dan rute motor terhadap kondisi nyata.
-3. Tingkatkan pencarian tempat menjadi autocomplete dengan pemilihan hasil dan reverse geocoding.
-4. Buat kontrak API untuk order, status perjalanan, driver assignment, dan koordinat.
-5. Implementasikan backend Go + PostgreSQL/PostGIS serta komunikasi real-time untuk uji dua perangkat.
+Workflow `.github/workflows/pages.yml` menerbitkan isi repository dari branch `main` ke GitHub Pages.
