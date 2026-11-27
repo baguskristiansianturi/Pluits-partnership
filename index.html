@@ -46,17 +46,58 @@
   .app.status-active .timeline{margin-bottom:18px}
 }
 
+
+/* Standalone PLUITS Trans app shell and mobile navigation */
+html,body{background:#fff}
+.app-shell{width:100%;max-width:760px;margin:0 auto;min-height:100dvh;border-radius:0!important;overflow:visible!important;padding-bottom:calc(78px + env(safe-area-inset-bottom));box-shadow:none!important;border:0!important}
+.app-shell .appbar{position:sticky;top:0;height:58px;padding:0 14px;z-index:30;border-bottom:1px solid #edf1ef}
+.app-shell .app-logo{border:0;flex:none}
+.brand-home{cursor:pointer}
+.membership-chip{margin-left:auto;border:1px solid #dceee9;background:#f1faf7;color:#087e76;border-radius:999px;padding:6px 9px;font-size:9px;font-weight:800;letter-spacing:.02em}
+.app-shell .app-help{margin-left:0;flex:none}
+.app-shell .map-area{height:clamp(230px,34vh,360px);border-bottom:1px solid #e4ebe8}
+.app-shell .content{max-width:680px;margin:0 auto;padding:18px 16px 26px}
+.app-shell .booking-screen{min-height:calc(100dvh - 370px)}
+.app-shell .nav-panel{display:none;min-height:calc(100dvh - 380px);padding:20px 17px 30px;max-width:680px;margin:0 auto;background:#fff}
+.app-shell .nav-panel.show{display:block}
+.nav-panel .nav-panel-kicker{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:var(--teal2);margin:0 0 7px}
+.nav-panel h2{font-size:23px;letter-spacing:-.04em;margin:0 0 8px}
+.nav-panel .panel-description{font-size:12px;line-height:1.6;color:#788a8d;margin:0 0 18px}
+.nav-panel .empty-state{border:1px solid #e6eeeb;background:#f8fbfa;border-radius:16px;padding:18px;text-align:center}
+.nav-panel .empty-state .empty-icon{width:46px;height:46px;border-radius:15px;background:#eaf7f4;color:var(--teal2);display:grid;place-items:center;font-size:22px;margin:0 auto 11px}
+.nav-panel .empty-state b{font-size:13px;display:block}
+.nav-panel .empty-state p{font-size:11px;line-height:1.55;color:#829194;margin:6px 0 0}
+.nav-panel .membership-card{border:1px solid #dcece7;background:linear-gradient(135deg,#f1faf7,#fff);border-radius:18px;padding:18px;margin:16px 0}
+.nav-panel .membership-card .member-logo{width:34px;height:34px;border-radius:11px;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:900;margin-bottom:13px}
+.nav-panel .membership-card b{font-size:16px;display:block}
+.nav-panel .membership-card small{font-size:10px;color:#73878a;display:block;margin-top:5px;line-height:1.5}
+.nav-panel .panel-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #edf1ef}
+.nav-panel .panel-row .panel-row-icon{width:34px;height:34px;border-radius:11px;background:#f0f5f3;display:grid;place-items:center;color:#42625e}
+.nav-panel .panel-row b{font-size:11px;display:block}
+.nav-panel .panel-row small{font-size:9px;color:#8a999b;display:block;margin-top:3px}
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:100;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:2px;padding:8px 7px calc(8px + env(safe-area-inset-bottom));background:#ffffffed;border-top:1px solid #e9efec;backdrop-filter:blur(16px);box-shadow:0 -5px 22px #173b3508}
+.nav-item{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;height:48px;border:0;background:transparent;color:#879598;padding:0 2px}
+.nav-item small{font-size:9px;line-height:1.1;font-weight:750;white-space:nowrap}
+.nav-icon{height:22px;display:grid;place-items:center;font-size:21px;line-height:1;font-weight:600}
+.nav-item.active{color:var(--teal2)}
+.nav-brand{width:27px;height:27px;border-radius:9px;background:#e8f7f3;color:var(--teal);display:grid;place-items:center;font-size:20px;font-weight:900;line-height:1}
+.brand-nav{gap:2px}
+.nav-quick{height:57px;transform:translateY(-5px);color:#fff}
+.nav-quick .quick-icon{width:43px;height:43px;border-radius:15px;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:500;line-height:1;box-shadow:0 5px 14px #079b8e35}
+.nav-quick small{color:#087e76}
+.nav-item:active{transform:scale(.96)}
+.nav-quick:active{transform:translateY(-5px) scale(.96)}
+.app-shell .toast{position:fixed;left:14px;right:14px;bottom:calc(75px + env(safe-area-inset-bottom));max-width:620px;margin:auto;z-index:150}
+@media(min-width:761px){.bottom-nav{left:50%;right:auto;width:min(760px,100%);transform:translateX(-50%);padding-left:24px;padding-right:24px}.app-shell .map-area{height:360px}.app-shell .content{padding-left:24px;padding-right:24px}}
+@media(max-width:600px){.app-shell{padding-bottom:calc(75px + env(safe-area-inset-bottom))}.app-shell .appbar{height:56px}.app-shell .map-area{height:33vh;min-height:220px;max-height:330px}.app-shell .content{padding:16px 14px 25px}.app-shell .nav-panel{min-height:calc(100dvh - 330px);padding:20px 15px 30px}.app-shell.status-active{padding-bottom:calc(75px + env(safe-area-inset-bottom))}.app-shell.status-active .appbar{flex:0 0 56px}.app-shell.status-active .map-area{flex:0 0 30vh;height:30vh;min-height:185px;max-height:270px}}
 </style>
 </head>
 <body>
-<div class="studio">
-<header class="studio-head"><div class="studio-brand"><div class="logo">p</div><div>PLUITS <span>Design Studio</span></div></div><div class="studio-label">Product experience · Trans</div></header>
-<div class="studio-intro"><h1>PLUITS Trans</h1><p>Alur pemesanan perjalanan hingga driver tiba di titik jemput.</p></div>
-<div class="workspace">
-<section class="device">
-<div class="app">
-<header class="appbar"><div class="app-logo">p</div><div class="app-title">PLUITS <span>Trans</span></div><button class="app-help" id="help" aria-label="Bantuan">?</button></header>
+<div class="app app-shell">
+<header class="appbar"><button class="app-logo brand-home" data-nav="home" aria-label="PLUITS Trans">p</button><div class="app-title">PLUITS <span>Trans</span></div><span class="membership-chip">Membership</span><button class="app-help" id="help" aria-label="Bantuan">?</button></header>
+
 <div class="map-area"><div id="map"></div><div class="map-loading" id="mapLoading">Memuat peta…</div><div class="map-top-pill"><i></i><span id="mapCaption">Peta lokasi perjalanan</span></div><div class="map-eta" id="mapEta"><small>ESTIMASI TIBA</small><span id="mapEtaValue">Mencari driver</span></div><div class="driver-count-pill" id="driverCountPill"><i></i><span>8 driver di sekitar</span></div><div class="radius-legend" id="radiusLegend">Radius 1,5 km</div><div class="map-hint" id="mapHint"></div><button class="map-location" id="locate" aria-label="Gunakan lokasi saya">◎</button></div>
+<section class="nav-panel" id="navPanel" aria-live="polite"></section>
 <div class="booking-screen" id="bookingScreen">
 <div class="content">
 <div class="booking-step active" id="locationStep">
@@ -116,18 +157,13 @@
 </section>
 <div class="toast" id="toast"></div>
 </div>
-</section>
-<aside class="studio-side">
-<h2>Alur pemesanan</h2><p>Perjalanan dibuat sederhana dalam beberapa langkah, dari menentukan tujuan sampai driver tiba.</p>
-<div class="stage"><span class="stage-num">1</span><div><b>Peta di bagian atas</b><small>Titik jemput dan tujuan ditampilkan pada peta yang sama. Pilih alamat atau gunakan peta untuk mengatur titik secara langsung.</small></div></div>
-<div class="stage"><span class="stage-num">2</span><div><b>Alamat selalu tersinkron</b><small>Pilih hasil pencarian untuk memindahkan pin. Geser pin untuk memperbarui alamat. Simpan titik agar tidak berubah tanpa sengaja.</small></div></div>
-<div class="stage"><span class="stage-num">3</span><div><b>Pilih kendaraan yang sesuai</b><small>Pelanggan dapat memilih NMAX atau Scoopy, serta mobil Reguler atau XL. Setiap pilihan memiliki perkiraan tarif sendiri.</small></div></div>
-<div class="stage"><span class="stage-num">4</span><div><b>Pencarian hingga driver tiba</b><small>Ada proses pencarian, driver ditemukan, pesan otomatis “saya sedang menuju”, estimasi kedatangan, dan status driver sudah sampai.</small></div></div>
-<div class="side-rule"></div>
-<div class="side-note"><strong>Fokus pengalaman:</strong> satu langkah untuk menentukan perjalanan, satu langkah untuk memilih kendaraan dan driver. Informasi ditampilkan saat dibutuhkan agar layar tetap rapi.</div>
-<button class="restart" id="restart">↻ Mulai ulang alur</button>
-</aside>
-</div>
+<nav class="bottom-nav" aria-label="Navigasi PLUITS Trans">
+<button class="nav-item brand-nav active" data-nav="home" aria-label="Beranda PLUITS Trans"><span class="nav-brand">p</span><small>Trans</small></button>
+<button class="nav-item" data-nav="trips"><span class="nav-icon">▤</span><small>Transaksi</small></button>
+<button class="nav-item nav-quick" data-nav="quick"><span class="quick-icon">＋</span><small>Pesan</small></button>
+<button class="nav-item" data-nav="messages"><span class="nav-icon">▢</span><small>Pesan</small></button>
+<button class="nav-item" data-nav="profile"><span class="nav-icon">◉</span><small>Profil</small></button>
+</nav>
 </div>
 <script type="module">
 import * as maplibregl from "https://unpkg.com/maplibre-gl@6.19.0/dist/maplibre-gl.mjs";
@@ -291,6 +327,26 @@ $('backBooking').addEventListener('click',()=>{if(tripState==='arrived'){notify(
 $('restart').addEventListener('click',()=>{cancelTrip();['pickup','destination'].forEach(k=>{$(k).value='';coords[k]=null;saved[k]=false;setSub(k,'Belum memilih titik');updateSaveUI(k);if(markers[k]){markers[k].remove();markers[k]=null}});vehicle='motor-nmax';gender=null;$('vehicleStep').classList.remove('active');$('locationStep').classList.add('active');$('bookingScreen').classList.remove('vehicle-stage');document.querySelectorAll('.vehicle').forEach(x=>x.classList.toggle('active',x.dataset.vehicle==='motor-nmax'));document.querySelectorAll('.gender-option').forEach(x=>x.classList.remove('active'));$('genderBlock').style.display='block';$('genderNote').style.display='block';clearFare();clearRouteLayer();$('suggestions').classList.remove('show');notify('Alur dimulai ulang')});
 $('help').addEventListener('click',()=>notify('Bantuan PLUITS Trans akan tersedia di pusat bantuan.'));
 document.addEventListener('click',e=>{if(!e.target.closest('.locations')&&!e.target.closest('.suggestions'))$('suggestions').classList.remove('show')});
+
+const navPanel=$('navPanel');
+function setNavActive(page){document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.nav===page));}
+function showNavPage(page){
+  if(page==='home'||page==='quick'){
+    navPanel.classList.remove('show');$('bookingScreen').classList.remove('hide');setNavActive(page==='quick'?'quick':'home');
+    if(page==='quick'){window.scrollTo({top:0,behavior:'smooth'});notify('Tentukan lokasi jemput dan tujuan untuk mulai memesan.');}
+    return;
+  }
+  $('bookingScreen').classList.add('hide');navPanel.classList.add('show');setNavActive(page);
+  if(page==='trips'){
+    navPanel.innerHTML='<p class="nav-panel-kicker">Aktivitas</p><h2>Transaksi berjalan</h2><p class="panel-description">Pantau perjalanan atau pengantaran yang sedang berlangsung.</p><div class="empty-state"><div class="empty-icon">▤</div><b>Belum ada transaksi aktif</b><p>Pesanan yang sedang berjalan akan tampil di bagian ini setelah alur pemesanan terhubung.</p></div>';
+  }else if(page==='messages'){
+    navPanel.innerHTML='<p class="nav-panel-kicker">Komunikasi</p><h2>Pesan</h2><p class="panel-description">Percakapan terkait perjalanan dan pengantaran.</p><div class="empty-state"><div class="empty-icon">▢</div><b>Belum ada pesan</b><p>Pesan dari mitra atau driver akan tersedia di sini ketika layanan pesan aktif.</p></div>';
+  }else if(page==='profile'){
+    navPanel.innerHTML='<p class="nav-panel-kicker">Akun</p><h2>Profil & Membership</h2><p class="panel-description">Identitas akun dan keanggotaan di ekosistem PLUITS.</p><div class="membership-card"><div class="member-logo">p</div><b>PLUITS Membership</b><small>Keanggotaan terhubung dengan akun PLUITS. Pada prototipe ini, autentikasi dan sinkronisasi akun belum aktif.</small></div><div class="panel-row"><span class="panel-row-icon">◉</span><div><b>Profil pengguna</b><small>Informasi profil akan mengikuti akun PLUITS.</small></div></div><div class="panel-row"><span class="panel-row-icon">◇</span><div><b>Status keanggotaan</b><small>Belum terhubung ke sistem akun.</small></div></div>';
+  }
+}
+document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>showNavPage(b.dataset.nav)));
+
 initMap();updateSaveUI('pickup');updateSaveUI('destination');clearFare();
 </script>
 </body></html>
