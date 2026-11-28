@@ -447,6 +447,9 @@ html,body{
 }
 
 /* Responsive layout system: compact phones through wide desktop */
+/* Keep the intentional carousel edge-bleed inside the phone viewport. */
+.app-shell .story-carousel{margin-right:-10px}
+
 *,*::before,*::after{box-sizing:border-box}
 html{width:100%;min-width:0;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
