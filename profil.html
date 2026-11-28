@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff"><title>Profil Pengguna — PLUITS Trans</title>
+<style>
+:root{--teal:#079b8e;--ink:#172f36;--muted:#75858a;--line:#e7edeb;--bg:#f5f8f7;--soft:#edf8f6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+header{height:60px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:2}
+.brand{display:flex;align-items:center;gap:9px;font-weight:850;font-size:14px;text-decoration:none;color:var(--ink)}.mark{width:31px;height:31px;border-radius:10px;background:#e9f7f4;color:var(--teal);display:grid;place-items:center;font-size:21px}.brand em{font-style:normal;color:var(--teal)}
+.back{border:1px solid var(--line);border-radius:10px;padding:8px 11px;color:#536c70;font-size:11px;font-weight:750;background:#fff;text-decoration:none}
+main{max-width:620px;margin:18px auto;padding:0 14px 90px}.eyebrow{font-size:10px;letter-spacing:.12em;font-weight:850;color:var(--teal);margin:8px 0}.heading{font-size:26px;letter-spacing:-.045em;margin:0 0 5px}.sub{font-size:12px;color:var(--muted);margin:0 0 18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 8px 24px #183b3507}
+.identity{display:flex;align-items:center;gap:13px}.avatar{width:58px;height:58px;border-radius:18px;background:var(--soft);display:grid;place-items:center;color:var(--teal);font-size:25px;font-weight:850}.identity b{font-size:15px}.identity small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.membership{background:linear-gradient(120deg,#e9f8f4,#f5fbf9);border:1px solid #dcefe9}.membership b{font-size:13px}.membership p{font-size:10px;line-height:1.5;color:#6e8582;margin:6px 0 0}
+.section-title{font-size:12px;font-weight:850;margin:20px 2px 8px}.row{width:100%;display:flex;align-items:center;gap:12px;padding:14px 4px;border:0;border-bottom:1px solid #eff2f1;background:#fff;text-align:left;color:var(--ink);cursor:pointer}.row:last-child{border-bottom:0}.ico{width:35px;height:35px;border-radius:11px;background:#f1f7f5;display:grid;place-items:center;color:var(--teal);font-size:16px}.row span:nth-child(2){flex:1}.row b{display:block;font-size:12px}.row small{display:block;font-size:10px;color:var(--muted);margin-top:3px}.arrow{color:#93a19f}
+.notice{font-size:10px;color:#7d8c8b;line-height:1.5;background:#f7f9f8;border-radius:12px;padding:12px;margin-top:14px}
+nav{position:fixed;bottom:0;left:0;right:0;height:62px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding-bottom:env(safe-area-inset-bottom)}nav a{font-size:10px;color:#7b8b89;text-decoration:none;text-align:center}nav a.active{color:var(--teal);font-weight:850}nav i{display:block;font-style:normal;font-size:18px;margin-bottom:2px}
+</style></head>
+<body>
+<header><a class="brand" href="./pluittrans.html"><span class="mark">p</span><span>PLUITS <em>Trans</em></span></a><a class="back" href="./pluittrans.html">‹ Beranda</a></header>
+<main>
+<p class="eyebrow">AKUN PENGGUNA</p><h1 class="heading">Profil</h1><p class="sub">Identitas, keanggotaan, dan pengaturan akun PLUITS Trans.</p>
+<section class="card identity"><div class="avatar">P</div><div><b>Pengguna PLUITS</b><small>Akun pratinjau · belum masuk</small></div></section>
+<section class="card membership"><b>◇ &nbsp; PLUITS Membership</b><p>Informasi membership dan manfaat akan tersinkron setelah akun PLUITS terhubung.</p></section>
+<h2 class="section-title">Akun saya</h2>
+<section class="card" style="padding:4px 14px">
+<button class="row" data-action="identity"><span class="ico">◉</span><span><b>Data profil</b><small>Nama, foto, dan informasi pengguna</small></span><span class="arrow">›</span></button>
+<button class="row" data-action="membership"><span class="ico">◇</span><span><b>Membership</b><small>Status keanggotaan dan manfaat</small></span><span class="arrow">›</span></button>
+<button class="row" data-action="wallet"><span class="ico">▣</span><span><b>PLUITS Wallet</b><small>Dompet digital · belum terhubung</small></span><span class="arrow">›</span></button>
+<button class="row" data-action="settings"><span class="ico">⚙</span><span><b>Pengaturan & privasi</b><small>Preferensi akun dan keamanan</small></span><span class="arrow">›</span></button>
+</section>
+<p class="notice" id="notice">Mode pratinjau: data akun, wallet, dan autentikasi belum terhubung ke backend.</p>
+</main>
+<nav><a href="./pluittrans.html"><i>⌂</i>Beranda</a><a href="./pluittrans.html#trips"><i>▤</i>Transaksi</a><a href="./pluittrans.html#quick"><i>＋</i>Pesan</a><a href="./pluittrans.html#messages"><i>◌</i>Chat</a><a class="active" href="./profil.html"><i>◉</i>Profil</a></nav>
+<script>
+const labels={identity:"Data profil",membership:"PLUITS Membership",wallet:"PLUITS Wallet",settings:"Pengaturan & privasi"};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-action]");if(!b)return;const name=labels[b.dataset.action];document.getElementById("notice").textContent=name+" belum terhubung. Bagian ini akan aktif setelah autentikasi dan layanan akun PLUITS tersedia.";});
+</script></body></html>
