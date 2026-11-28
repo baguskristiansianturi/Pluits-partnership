@@ -313,6 +313,12 @@ html,body{
 .story-article p{font-size:12px;line-height:1.7;color:#647779}
 .story-article .article-kicker{font-size:10px;color:#13877c;font-weight:850;letter-spacing:.12em}
 .story-article .article-cta{background:#078c80;color:#fff;border:0;border-radius:12px;padding:13px 16px;font-weight:850;font-size:11px;margin-top:10px}
+.nav-panel:has(.story-article),.nav-panel:has(.stories-index){min-height:0!important}
+.story-article{padding-bottom:14px!important}
+.article-footer{margin:16px 0 0;padding:15px 13px 13px;border:1px solid #e5eeea;border-radius:14px;background:linear-gradient(135deg,#f4faf8,#fff);text-align:center}
+.article-footer b{display:block;color:#31524f;font-size:11px;letter-spacing:.01em}
+.article-footer p{margin:5px 0 8px;font-size:9px;line-height:1.5;color:#81918e}
+.article-footer small{font-size:8px;color:#a0aaa7}
 @media(min-width:480px){.story-card{flex-basis:78%;height:230px}}
 
 .map-visibility-toggle{display:inline-flex;align-items:center;gap:7px;border:1px solid #dce9e5;background:#f2f8f6;color:#147d73;border-radius:20px;padding:8px 12px;font-size:10px;font-weight:800;margin:2px 0 13px}.map-visibility-toggle:active{transform:scale(.98)}
@@ -954,7 +960,17 @@ function showStory(key){
  const d=storyData[key];if(!d)return;setPageRoute('story-'+key);activePage='story';homeScreen.classList.add('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';navPanel.classList.add('show');setNavActive('home');
  const paragraphs=d.paragraphs.map(p=>'<p>'+p+'</p>').join('');
  const related=d.related.map(storyCardMarkup).join('');
- navPanel.innerHTML='<article class="story-article"><button class="service-back" data-nav="home">‹ Kembali ke beranda</button><div class="article-kicker">'+d.k+'</div><div class="story-hero" role="img" aria-label="'+d.title+'" style="background-image:url(\''+d.img+'\')"></div><h1>'+d.title+'</h1><p class="article-summary">'+d.summary+'</p><div class="article-meta">'+d.read+' <span>·</span> PLUITS Journal</div><div class="article-body">'+paragraphs+'</div><section class="article-service"><small>TERKAIT LAYANAN</small><b>'+d.cta+'</b><p>Pelajari alur layanan yang relevan dengan topik ini. Fitur operasional yang belum terhubung akan ditandai sebagai prototipe.</p><button class="article-cta" data-story-service="'+d.service+'">'+d.cta+' →</button></section><section class="article-related"><div class="home-section-head"><div><h2>Lanjutkan membaca</h2><small class="section-subtitle">Cerita lain yang masih berkaitan</small></div><button data-open-stories>Lihat semua</button></div><div class="story-related-carousel">'+related+'</div></section></article>';
+ const ctaCopy={
+ ride:{title:'Perjalanan berikutnya dimulai dari sini',body:'Punya tujuan? Kenali pengalaman Motorbike PLUITS dan siapkan perjalanan dengan lebih nyaman.',button:'Rencanakan perjalanan'},
+ car:{title:'Pergi bersama dengan lebih nyaman',body:'Temukan pilihan perjalanan mobil yang dirancang untuk menemani aktivitasmu.',button:'Jelajahi layanan mobil'},
+ food:{title:'Ada rasa lokal yang menunggu untuk ditemukan',body:'Kenali pilihan kuliner dan cerita di balik usaha yang hadir di sekitar kita.',button:'Jelajahi PLUITS Food'},
+ coffee:{title:'Dukung kedai lokal, nikmati cerita di setiap cangkir',body:'Temukan bagaimana PLUITS ingin mendekatkan pelanggan dengan kedai dan pelaku usaha lokal.',button:'Kenali Marketplace'},
+ marketplace:{title:'Temukan usaha lokal, dukung mereka tumbuh',body:'Kenali ruang yang sedang disiapkan PLUITS untuk menghubungkan produk, usaha, dan pelanggan.',button:'Jelajahi visi Marketplace'},
+ 'inclusive-coming-soon':{title:'Kesempatan yang lebih luas dimulai dari kepedulian',body:'Kenali arah program mitra inklusif yang sedang disiapkan dengan mengutamakan kemampuan dan pilihan setiap orang.',button:'Lihat program inklusif'},
+ courier:{title:'Kirim kebutuhanmu dengan lebih praktis',body:'Kenali pengalaman pengiriman yang sedang disiapkan untuk membantu kebutuhan sehari-hari.',button:'Jelajahi layanan kurir'}
+ };
+ const c=ctaCopy[d.service]||{title:'Temukan layanan PLUITS',body:'Kenali lebih dekat pengalaman yang sedang kami siapkan.',button:'Jelajahi PLUITS'};
+ navPanel.innerHTML='<article class="story-article"><button class="service-back" data-nav="home">‹ Kembali ke beranda</button><div class="article-kicker">'+d.k+'</div><div class="story-hero" role="img" aria-label="'+d.title+'" style="background-image:url(\\''+d.img+'\\')"></div><h1>'+d.title+'</h1><p class="article-summary">'+d.summary+'</p><div class="article-meta">'+d.read+' <span>·</span> PLUITS Journal</div><div class="article-body">'+paragraphs+'</div><section class="article-service"><small>LANJUTKAN PERJALANANMU</small><b>'+c.title+'</b><p>'+c.body+'</p><button class="article-cta" data-story-service="'+d.service+'">'+c.button+' →</button></section><section class="article-related"><div class="home-section-head"><div><h2>Lanjutkan membaca</h2><small class="section-subtitle">Cerita lain yang mungkin kamu sukai</small></div><button data-open-stories>Lihat semua</button></div><div class="story-related-carousel">'+related+'</div></section><footer class="article-footer"><b>PLUITS Journal</b><p>Cerita tentang usaha lokal, mobilitas, dan kesempatan untuk tumbuh bersama.</p><small>© 2026 PLUITS. Semua hak dilindungi.</small></footer></article>'
  window.scrollTo({top:0,behavior:'smooth'});
 }
 
