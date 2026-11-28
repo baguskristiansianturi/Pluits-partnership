@@ -208,7 +208,79 @@ html,body{background:#fff}
 .map-visibility-toggle{display:inline-flex;align-items:center;gap:7px;border:1px solid #dce9e5;background:#f2f8f6;color:#147d73;border-radius:20px;padding:8px 12px;font-size:10px;font-weight:800;margin:2px 0 13px}.map-visibility-toggle:active{transform:scale(.98)}
 /* Beranda: peta hanya tampil saat pengguna membuka alur pemesanan. */
 .app-shell .map-area{display:none}
-\n/* Beranda: lokasi tampil singkat, lalu prompt pencarian berganti secara alami. */\n.home-search-copy b{transition:opacity .22s ease}.home-search-copy small{transition:opacity .5s ease}.home-search-copy small.location-fade{opacity:0}\n</style>
+\n/* Beranda: lokasi tampil singkat, lalu prompt pencarian berganti secara alami. */\n.home-search-copy b{transition:opacity .22s ease}.home-search-copy small{transition:opacity .5s ease}.home-search-copy small.location-fade{opacity:0}\n
+/* Navigasi bawah: ikon sejajar, ringkas, dan konsisten pada semua tab. */
+.bottom-nav{
+  align-items:center;
+  height:calc(62px + env(safe-area-inset-bottom));
+  padding:6px 8px calc(6px + env(safe-area-inset-bottom));
+  gap:0;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  background:rgba(255,255,255,.96);
+  border-top:1px solid #e8eeeb;
+  box-shadow:0 -4px 18px rgba(24,58,52,.045);
+}
+.nav-item{
+  height:44px;
+  min-height:44px;
+  align-self:center;
+  gap:3px;
+  padding:0;
+  transform:none;
+  color:#82908f;
+}
+.nav-item .nav-icon{
+  display:grid;
+  place-items:center;
+  height:25px;
+  font-size:19px;
+  line-height:1;
+  font-weight:500;
+}
+.nav-item small{
+  font-size:9px;
+  line-height:1.1;
+  font-weight:700;
+  letter-spacing:.01em;
+}
+.nav-item.active{color:#13877c}
+.nav-brand{
+  width:23px;
+  height:23px;
+  border-radius:8px;
+  font-size:17px;
+  box-shadow:none;
+}
+.brand-nav{gap:3px}
+.nav-quick{
+  height:44px;
+  min-height:44px;
+  margin:0;
+  transform:none;
+  gap:3px;
+  color:#82908f;
+}
+.nav-quick .quick-icon{
+  width:30px;
+  height:25px;
+  border-radius:9px;
+  background:transparent;
+  color:#647a78;
+  font-size:24px;
+  line-height:1;
+  font-weight:400;
+  box-shadow:none;
+}
+.nav-quick small{color:inherit}
+.nav-quick.active .quick-icon{
+  background:#e9f6f2;
+  color:#087f75;
+}
+.nav-item:active,.nav-quick:active{transform:scale(.97)}
+@media(min-width:560px){
+  .bottom-nav{height:62px;padding:6px 8px}
+}
+</style>
 </head>
 <body>
 <div class="app app-shell">
