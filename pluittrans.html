@@ -615,6 +615,81 @@ button,input,select,textarea{font:inherit;max-width:100%}
 @media(max-width:360px){.stories-index{padding-inline:11px}.stories-index-grid{gap:9px}.story-related-copy{padding:8px}.story-related-copy b{font-size:11px}.story-article{padding-inline:11px}}
 @media(min-width:600px){.stories-index-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
+
+/* Final polish: compact four-column service shortcuts on every phone size. */
+.app-shell .home-screen .service-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  column-gap:clamp(3px,1.4vw,8px)!important;
+  row-gap:12px!important;
+}
+.app-shell .home-screen .service-tile,
+.app-shell .home-screen .service-tile:link,
+.app-shell .home-screen .service-tile:visited,
+.app-shell .home-screen .service-tile:hover,
+.app-shell .home-screen .service-tile:active,
+.app-shell .home-screen .service-tile:focus{
+  color:#263e42!important;
+  text-decoration:none!important;
+  text-decoration-line:none!important;
+  text-underline-offset:0!important;
+  -webkit-tap-highlight-color:transparent;
+}
+.app-shell .home-screen .service-tile{
+  padding:7px 2px 8px!important;
+  border:0!important;
+  border-radius:13px;
+  background:transparent!important;
+  text-align:center;
+}
+.app-shell .home-screen .service-icon{
+  width:clamp(39px,11.5vw,48px)!important;
+  height:clamp(39px,11.5vw,48px)!important;
+  border-radius:14px!important;
+  font-size:21px!important;
+  margin:0 auto 6px!important;
+  flex:0 0 auto;
+}
+.app-shell .home-screen .service-tile b{
+  width:100%;
+  min-height:2.4em!important;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  font-size:clamp(9px,2.8vw,11px)!important;
+  line-height:1.2!important;
+  font-weight:750;
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+.app-shell .home-screen .service-tile small{
+  width:100%;
+  min-height:2.4em!important;
+  font-size:clamp(8px,2.35vw,9px)!important;
+  line-height:1.25!important;
+  text-align:center;
+  color:#849294!important;
+  overflow-wrap:anywhere;
+}
+.app-shell .home-screen .service-tile:focus-visible{
+  outline:2px solid #079b8e;
+  outline-offset:2px;
+  border-radius:12px;
+}
+@media(max-width:360px){
+  .app-shell .home-screen .service-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    column-gap:2px!important;
+    row-gap:10px!important;
+  }
+  .app-shell .home-screen .service-tile{padding:6px 1px 7px!important}
+  .app-shell .home-screen .service-icon{
+    width:38px!important;height:38px!important;border-radius:12px!important;font-size:20px!important;
+  }
+  .app-shell .home-screen .service-tile b{font-size:9px!important;min-height:2.5em!important}
+  .app-shell .home-screen .service-tile small{font-size:8px!important;min-height:2.5em!important}
+}
+
 </style>
 </head>
 <body>
