@@ -56,7 +56,7 @@ const { chromium } = require('playwright');
           if (result.document > width + 1 || result.body > width + 1) failures.push({ width, path, ...result, issue: 'horizontal overflow' });
           if (result.bottomNav && (result.bottomNav.left < -1 || result.bottomNav.right > width + 1)) failures.push({ width, path, ...result, issue: 'bottom navigation outside viewport' });
           if (path === 'pluittrans.html' && result.serviceTiles < 9) failures.push({ width, path, ...result, issue: 'all service tiles not rendered' });
-          if (path === 'pluittrans.html' && result.homeLayout && result.homeLayout.columns !== (width <= 360 ? 3 : 4)) failures.push({ width, path, ...result, issue: 'service grid column count is not responsive' });
+          if (path === 'pluittrans.html' && result.homeLayout && result.homeLayout.columns !== 4) failures.push({ width, path, ...result, issue: 'homepage must show exactly four service cards per row on every viewport' });
           if (path === 'pluittrans.html' && result.homeLayout && result.homeLayout.story && (result.homeLayout.story.left < -1 || result.homeLayout.story.right > width + 1)) failures.push({ width, path, ...result, issue: 'story carousel card outside viewport' });
           if (path === 'pluittrans.html' && result.homeLayout && (result.homeLayout.sectionGap < 16 || result.homeLayout.sectionGap > 24)) failures.push({ width, path, ...result, issue: 'home section spacing outside design range' });
           if (path === 'profil.html' && !result.profileCard) failures.push({ width, path, ...result, issue: 'profile content not rendered' });
