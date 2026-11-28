@@ -1,48 +1,27 @@
 # PLUITS Trans
 
-**PLUITS Trans** adalah proyek mandiri untuk layanan mobilitas dan pengantaran di ekosistem PLUITS. Mulai sekarang, pekerjaan PLUITS Trans dikelola di repository ini, terpisah dari repository utama `pluits`.
+**PLUITS Trans** adalah proyek mandiri untuk layanan mobilitas dan pengantaran di ekosistem PLUITS. Pengembangan dilakukan langsung pada branch `main`; tidak menggunakan alur pull request untuk perubahan rutin.
 
-## Preview
+## Live preview
 
-Saat repository diubah namanya menjadi `pluits-trans`, GitHub Pages akan tersedia di:
-
-https://baguskristiansianturi.github.io/pluits-trans/
-
-Sebelum rename repository selesai, URL Pages masih menggunakan nama repository saat ini:
 https://baguskristiansianturi.github.io/Pluits-partnership/
 
-## Cakupan proyek
+## Fondasi peta dan lokasi
 
-- Ride / perjalanan penumpang
-- Courier / pengantaran paket, dokumen, dan barang
-- Pencarian tempat dan titik jemput/tujuan
-- Peta, rute, status perjalanan, dan pengalaman pengemudi
-- Fondasi untuk pengembangan modular layanan transportasi
+- **MapLibre GL JS** sebagai renderer peta interaktif.
+- **OpenFreeMap Liberty vector tiles** untuk peta jalan, label tempat, dan data bangunan yang tersedia pada sumber OpenStreetMap.
+- **Photon (Komoot)** untuk autocomplete nama tempat/POI dan reverse geocoding. Hasil Indonesia diprioritaskan berdasarkan jarak dari titik pencarian; pencarian titik jemput dibatasi pada radius lokal agar hasil kota yang jauh tidak mendominasi.
+- **Valhalla routing** dengan costing `motor_scooter` untuk rute roda dua dan `auto` untuk mobil.
+- **Browser Geolocation** untuk membaca posisi perangkat setelah pengguna memberikan izin.
+- Pin lokasi dapat dipilih pada peta dan digeser untuk menyesuaikan titik jemput atau tujuan.
 
-## Teknologi frontend saat ini
+## Batasan yang perlu diketahui
 
-- HTML, CSS, JavaScript — frontend statis, tanpa proses build
-- MapLibre GL JS — renderer peta
-- OpenStreetMap-based map tiles
-- Photon — pencarian tempat dan POI
-- OSRM public demo — perhitungan rute jalan
+Peta, nama bangunan, dan POI bergantung pada kelengkapan data OpenStreetMap di area tersebut. Photon dan endpoint Valhalla publik adalah layanan komunitas/prototipe, bukan SLA produksi; ketersediaan, batas pemakaian, dan akurasi rute harus diuji di lapangan. Jika layanan rute gagal, aplikasi tidak boleh mengarang jarak, ETA, atau garis rute untuk dianggap sebagai hasil navigasi nyata.
 
-## Status dan batasan
+Belum ada backend operasional untuk akun, pemesanan lintas perangkat, pencocokan driver, GPS driver real-time, pembayaran, maupun penyimpanan perjalanan. Simulasi UI yang ada bukan data armada aktif. Untuk produksi, PLUITS memerlukan layanan Go + PostgreSQL/PostGIS, kanal real-time, serta penyedia peta/geocoding/routing dengan ketentuan dan kapasitas yang sesuai.
 
-Ini masih **prototipe frontend untuk pengujian UI/UX**. Driver dispatch, order lintas perangkat, GPS pengemudi real-time, akun, pembayaran, dan penyimpanan server belum terhubung. Garis rute dan simulasi pengemudi bukan layanan operasional nyata.
-
-Layanan peta, geocoding, dan routing publik digunakan untuk prototipe; memiliki batas penggunaan dan tidak menjamin SLA produksi. Sebelum penggunaan produksi, PLUITS Trans memerlukan backend milik sendiri berbasis Go + PostgreSQL (PostGIS untuk data geospasial), provider data/routing yang sesuai, dan sistem real-time.
-
-## Prinsip repository
-
-- Semua perubahan PLUITS Trans dilakukan langsung pada repository proyek ini.
-- Jangan menaruh pekerjaan fitur Trans kembali di repository utama PLUITS.
-- Modul transportasi dikembangkan terpisah dan terstruktur agar mudah dipelihara.
-- Tidak menggunakan Supabase sebagai ketergantungan backend.
-
-## Halaman layanan
-
-Beranda PLUITS Partner mengarahkan setiap layanan ke halaman HTML tersendiri:
+## Struktur layanan
 
 - Motorbike: `motorbike.html`
 - Mobil: `mobil.html`
@@ -54,4 +33,9 @@ Beranda PLUITS Partner mengarahkan setiap layanan ke halaman HTML tersendiri:
 - Tiket & Aktivitas: `tiket.html`
 - Travel: `travel.html`
 
-Halaman-halaman layanan yang baru dibuat saat ini menyediakan alur antarmuka/pratinjau lokal. Integrasi pemesanan, pembayaran, dan penugasan mitra secara langsung masih memerlukan implementasi backend.
+## Prinsip repository
+
+- Modul Trans dikelola terpisah dari repository utama PLUITS.
+- Perubahan fitur dilakukan langsung ke `main`, tanpa PR.
+- Identitas visual menggunakan aset logo resmi PLUITS.
+- Tidak menggunakan Supabase sebagai ketergantungan backend.
