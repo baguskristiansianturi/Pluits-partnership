@@ -23,6 +23,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Validate navigation and JavaScript
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, subprocess
+          root = pathlib.Path('.')
+          home = (root / 'pluittrans.html').read_text()
+          assert re.search(r'\.home-screen\.hide\s*\{\s*display\s*:\s*none\s*!important', home), 'Home hide rule missing'
+          assert home.count('restoreRoute();') == 1, 'Route restoration must run exactly once'
+          routes = {'mobil.html':'car','makanan.html':'food','kopi.html':'coffee','kurir.html':'courier','antar-barang.html':'parcel','belanja.html':'groceries','tiket.html':'tickets','travel.html':'travel'}
+          for name, route in routes.items():
+              page = (root / name).read_text()
+              assert 'pluittrans.html#' + route in page, f'{name} route mismatch'
+              assert 'PLUITS Partner' not in page, f'{name} still uses Partner branding'
+          for name in ('pluittrans.html', 'motorbike.html', 'profil.html'):
+              html = (root / name).read_text()
+              blocks = re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>', html, re.I)
+              for index, block in enumerate(blocks):
+                  if not block.strip():
+                      continue
+                  target = pathlib.Path('/tmp') / (name.replace('/', '_') + f'.{index}.js')
+                  target.write_text(block)
+                  subprocess.run(['node', '--check', str(target)], check=True)
+          print('Navigation selectors, service routes, and inline JavaScript syntax validated.')
+          PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static site
