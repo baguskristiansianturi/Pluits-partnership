@@ -59,6 +59,39 @@ const { chromium } = require('playwright');
           if (path === 'pluittrans.html' && result.homeLayout && result.homeLayout.columns !== 4) failures.push({ width, path, ...result, issue: 'homepage must show exactly four service cards per row on every viewport' });
           if (path === 'pluittrans.html' && result.homeLayout && result.homeLayout.story && (result.homeLayout.story.left < -1 || result.homeLayout.story.right > width + 1)) failures.push({ width, path, ...result, issue: 'story carousel card outside viewport' });
           if (path === 'pluittrans.html' && result.homeLayout && (result.homeLayout.sectionGap < 16 || result.homeLayout.sectionGap > 24)) failures.push({ width, path, ...result, issue: 'home section spacing outside design range' });
+          if (path === 'pluittrans.html') {
+            try {
+              await page.locator('.service-tile[data-service="ride"]').first().click();
+              const booking = await page.evaluate(() => {
+                const app = document.querySelector('.app');
+                const sheet = document.querySelector('.booking-screen .content');
+                const map = document.querySelector('.map-area');
+                const nav = document.querySelector('.bottom-nav');
+                const rect = el => {
+                  if (!el) return null;
+                  const r = el.getBoundingClientRect();
+                  return {left: Math.round(r.left), right: Math.round(r.right), top: Math.round(r.top), bottom: Math.round(r.bottom), width: Math.round(r.width), height: Math.round(r.height)};
+                };
+                return {
+                  active: app?.classList.contains('booking-active'),
+                  bookingVisible: !!sheet && getComputedStyle(sheet).display !== 'none',
+                  mapVisible: !!map && getComputedStyle(map).display !== 'none',
+                  sheet: rect(sheet), map: rect(map), nav: rect(nav),
+                  cta: document.querySelector('#findDriver')?.textContent.trim() || '',
+                  pickup: !!document.querySelector('#pickup'),
+                  destination: !!document.querySelector('#destination')
+                };
+              });
+              if (!booking.active || !booking.bookingVisible || !booking.mapVisible || booking.cta !== 'Pesan motor' || !booking.pickup || !booking.destination ||
+                  !booking.sheet || booking.sheet.left < -1 || booking.sheet.right > width + 1 || booking.sheet.bottom > 850 ||
+                  (booking.nav && booking.sheet.bottom > booking.nav.top + 1)) {
+                failures.push({width, path, issue: 'map-first motorcycle booking reference layout failed', booking});
+              }
+              await page.locator('.bottom-nav [data-nav="home"]').click();
+            } catch (error) {
+              failures.push({width, path, issue: 'motor booking layout interaction test error', error: String(error)});
+            }
+          }
           if (path === 'profil.html' && !result.profileCard) failures.push({ width, path, ...result, issue: 'profile content not rendered' });
           if (path === 'pluittrans.html') {
             try {
