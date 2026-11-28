@@ -60,6 +60,44 @@ const { chromium } = require('playwright');
           if (path === 'pluittrans.html' && result.homeLayout && result.homeLayout.story && (result.homeLayout.story.left < -1 || result.homeLayout.story.right > width + 1)) failures.push({ width, path, ...result, issue: 'story carousel card outside viewport' });
           if (path === 'pluittrans.html' && result.homeLayout && (result.homeLayout.sectionGap < 16 || result.homeLayout.sectionGap > 24)) failures.push({ width, path, ...result, issue: 'home section spacing outside design range' });
           if (path === 'profil.html' && !result.profileCard) failures.push({ width, path, ...result, issue: 'profile content not rendered' });
+          if (path === 'pluittrans.html') {
+            try {
+              await page.locator('[data-story="food"]').first().click();
+              await page.waitForSelector('.story-article .article-body p');
+              const article = await page.evaluate(() => ({
+                title: document.querySelector('.story-article h1')?.textContent || '',
+                paragraphs: document.querySelectorAll('.story-article .article-body p').length,
+                related: document.querySelectorAll('.story-related-carousel [data-story]').length,
+                serviceCta: document.querySelector('.article-service [data-story-service]')?.getAttribute('data-story-service'),
+                hash: location.hash
+              }));
+              if (!article.title || article.paragraphs < 3 || article.related < 2 || article.serviceCta !== 'food' || article.hash !== '#story-food') {
+                failures.push({ width, path, issue: 'food article or relevant related-reading flow incomplete', article });
+              }
+              await page.locator('[data-open-stories]').first().click();
+              const index = await page.evaluate(() => ({
+                cards: document.querySelectorAll('.stories-index [data-story]').length,
+                heading: document.querySelector('.stories-index h1')?.textContent || '',
+                hash: location.hash
+              }));
+              if (index.cards !== 5 || index.heading !== 'Cerita & inspirasi' || index.hash !== '#stories') {
+                failures.push({ width, path, issue: 'all-articles index did not render', index });
+              }
+              await page.locator('.stories-index [data-story="courier"]').click();
+              const courier = await page.evaluate(() => ({
+                title: document.querySelector('.story-article h1')?.textContent || '',
+                service: document.querySelector('.article-service [data-story-service]')?.getAttribute('data-story-service'),
+                paragraphs: document.querySelectorAll('.story-article .article-body p').length
+              }));
+              if (courier.service !== 'courier' || courier.paragraphs < 3 || !courier.title.includes('paket')) {
+                failures.push({ width, path, issue: 'courier article is not relevant to courier service', courier });
+              }
+              await page.goBack();
+              await page.waitForTimeout(30);
+            } catch (error) {
+              failures.push({ width, path, issue: 'editorial navigation test error', error: String(error) });
+            }
+          }
         } catch (error) {
           failures.push({ width, path, issue: 'page load/test error', error: String(error) });
         }
