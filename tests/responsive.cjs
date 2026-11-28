@@ -24,6 +24,7 @@ const { chromium } = require('playwright');
               return { left: Math.round(r.left), right: Math.round(r.right), width: Math.round(r.width) };
             })(),
             serviceTiles: document.querySelectorAll('.service-tile').length,
+            overflowElements: Array.from(document.querySelectorAll('body *')).map(el => ({tag: el.tagName, cls: typeof el.className === 'string' ? el.className.slice(0,90) : '', id: el.id, left: Math.round(el.getBoundingClientRect().left), right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width)})).filter(el => el.right > window.innerWidth + 1 || el.left < -1).slice(0,12),
             profileCard: !!document.querySelector('main .card')
           }));
           if (result.document > width + 1 || result.body > width + 1) failures.push({ width, path, ...result, issue: 'horizontal overflow' });
