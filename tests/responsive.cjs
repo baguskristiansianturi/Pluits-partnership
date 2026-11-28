@@ -8,10 +8,15 @@ const { chromium } = require('playwright');
   try {
     for (const width of sizes) {
       const page = await browser.newPage({ viewport: { width, height: 850 }, deviceScaleFactor: 1 });
+      await page.route('**/*', route => {
+        const url = new URL(route.request().url());
+        if (url.hostname !== '127.0.0.1') return route.abort();
+        return route.continue();
+      });
       for (const path of pages) {
         try {
           await page.goto('http://127.0.0.1:4173/' + path, { waitUntil: 'domcontentloaded', timeout: 15000 });
-          await page.waitForTimeout(250);
+          await page.waitForTimeout(100);
           const result = await page.evaluate(() => ({
             viewport: window.innerWidth,
             document: document.documentElement.scrollWidth,
