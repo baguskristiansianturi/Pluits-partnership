@@ -30,11 +30,35 @@ const { chromium } = require('playwright');
             })(),
             serviceTiles: document.querySelectorAll('.service-tile').length,
             overflowElements: Array.from(document.querySelectorAll('body *')).map(el => ({tag: el.tagName, cls: typeof el.className === 'string' ? el.className.slice(0,90) : '', id: el.id, left: Math.round(el.getBoundingClientRect().left), right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width)})).filter(el => el.right > window.innerWidth + 1 || el.left < -1).slice(0,12),
-            profileCard: !!document.querySelector('main .card')
+            profileCard: !!document.querySelector('main .card'),
+            homeLayout: (() => {
+              const home = document.querySelector('.home-screen');
+              const grid = document.querySelector('.service-grid');
+              const carousel = document.querySelector('.story-carousel');
+              const firstStory = document.querySelector('.story-card');
+              const firstSection = document.querySelector('.home-section');
+              const bounds = el => {
+                if (!el) return null;
+                const r = el.getBoundingClientRect();
+                return { left: Math.round(r.left), right: Math.round(r.right), width: Math.round(r.width) };
+              };
+              return {
+                home: bounds(home),
+                grid: bounds(grid),
+                columns: grid ? getComputedStyle(grid).gridTemplateColumns.split(' ').length : 0,
+                story: bounds(firstStory),
+                carousel: bounds(carousel),
+                sectionGap: firstSection ? parseFloat(getComputedStyle(firstSection).marginTop) : 0,
+                tileCount: grid ? grid.querySelectorAll('.service-tile').length : 0
+              };
+            })()
           }));
           if (result.document > width + 1 || result.body > width + 1) failures.push({ width, path, ...result, issue: 'horizontal overflow' });
           if (result.bottomNav && (result.bottomNav.left < -1 || result.bottomNav.right > width + 1)) failures.push({ width, path, ...result, issue: 'bottom navigation outside viewport' });
-          if (path === 'pluittrans.html' && result.serviceTiles < 4) failures.push({ width, path, ...result, issue: 'service grid not rendered' });
+          if (path === 'pluittrans.html' && result.serviceTiles < 9) failures.push({ width, path, ...result, issue: 'all service tiles not rendered' });
+          if (path === 'pluittrans.html' && result.homeLayout && result.homeLayout.columns !== (width <= 360 ? 3 : 4)) failures.push({ width, path, ...result, issue: 'service grid column count is not responsive' });
+          if (path === 'pluittrans.html' && result.homeLayout && result.homeLayout.story && (result.homeLayout.story.left < -1 || result.homeLayout.story.right > width + 1)) failures.push({ width, path, ...result, issue: 'story carousel card outside viewport' });
+          if (path === 'pluittrans.html' && result.homeLayout && (result.homeLayout.sectionGap < 16 || result.homeLayout.sectionGap > 24)) failures.push({ width, path, ...result, issue: 'home section spacing outside design range' });
           if (path === 'profil.html' && !result.profileCard) failures.push({ width, path, ...result, issue: 'profile content not rendered' });
         } catch (error) {
           failures.push({ width, path, issue: 'page load/test error', error: String(error) });
