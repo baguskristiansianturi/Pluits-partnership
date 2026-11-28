@@ -894,7 +894,8 @@ async function photonSearch(query,bias,signal){
  const data=await response.json();return data.features||[];
 }
 async function searchPlaces(q){
- if(activeField==='pickup'&&!deviceLocation&&!coords.pickup){await locate(true)}
+ const searchField=activeField;
+ if(searchField==='pickup'&&!deviceLocation&&!coords.pickup){await locate(true);$(searchField).value=q;activeField=searchField}
  if(searchController)searchController.abort();
  const controller=new AbortController();searchController=controller;const seq=++searchSequence;
  const bias=(activeField==='pickup'?(deviceLocation||coords.pickup):coords.pickup)||{lat:(map&&map.getCenter()?map.getCenter().lat:bali.lat),lng:(map&&map.getCenter()?map.getCenter().lng:bali.lng)};
@@ -971,7 +972,7 @@ function initMap(){
   if(e&&e.error)console.warn('Map resource error',e.error);
   if(!mapReady&&!fallbackTried){fallbackTried=true;$('mapLoading').textContent='Memuat peta alternatif…';try{map.setStyle(fallbackStyle)}catch(err){console.warn('Fallback map style failed',err)}}
  });
- setTimeout(()=>{if(!mapReady&&!fallbackTried){fallbackTried=true;$('mapLoading').textContent='Mencoba sumber peta alternatif…';try{map.setStyle(fallbackStyle)}catch(e){console.warn(e)}}},9000);
+ setTimeout(()=>{if(!fallbackTried&&(!mapReady||!map.areTilesLoaded())){fallbackTried=true;$('mapLoading').textContent='Mencoba sumber peta alternatif…';try{map.setStyle(fallbackStyle)}catch(e){console.warn(e)}}},11000);
  setTimeout(()=>{if(!mapReady)$('mapLoading').textContent='Peta belum dapat dimuat. Periksa koneksi internet lalu coba lagi.'},22000);
  map.on('click',e=>{if(!mapMode){notify('Pilih tombol Peta untuk mengatur titik');return}const field=mapMode,p={lat:e.lngLat.lat,lng:e.lngLat.lng};setPoint(field,p,'Titik pada peta','Titik dipilih · mengambil alamat…');reversePoint(field,p);mapMode=null;document.querySelectorAll('.map-tag').forEach(x=>x.classList.remove('active'));$('mapHint').classList.remove('show')});
  setTimeout(()=>map.resize(),250);
