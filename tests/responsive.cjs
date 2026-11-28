@@ -92,6 +92,7 @@ const { chromium } = require('playwright');
               if (courier.service !== 'courier' || courier.paragraphs < 3 || !courier.title.includes('paket')) {
                 failures.push({ width, path, issue: 'courier article is not relevant to courier service', courier });
               }
+              await page.locator('.story-article [data-open-stories]').click();
               await page.locator('.stories-index [data-story="inclusive"]').click();
               const inclusive = await page.evaluate(() => ({
                 title: document.querySelector('.story-article h1')?.textContent || '',
