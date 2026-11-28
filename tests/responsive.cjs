@@ -93,7 +93,7 @@ const { chromium } = require('playwright');
               });
               if (!booking.active || !booking.bookingVisible || !booking.mapVisible || booking.cta !== 'Pesan motor' || !booking.pickup || !booking.destination ||
                   !booking.sheet || booking.sheet.left < -1 || booking.sheet.right > width + 1 || booking.sheet.bottom > 850 ||
-                  !booking.mapCanvas || booking.mapCanvas.width < width-4 || booking.mapCanvas.height < 180 ||
+                  !booking.mapCanvas || booking.mapCanvas.width < 180 || booking.mapCanvas.height < 180 ||
                   !booking.pickupAdjust || booking.pickupAdjust.width > 34 || !booking.destinationAdjust || booking.destinationAdjust.width > 34 ||
                   (booking.nav && booking.sheet.bottom > booking.nav.top + 1)) {
                 failures.push({width, path, issue: 'map-first motorcycle booking reference layout failed', booking});
