@@ -7,7 +7,7 @@ const { chromium } = require('playwright');
   const failures = [];
   try {
     for (const width of sizes) {
-      const page = await browser.newPage({ viewport: { width, height: 850 }, deviceScaleFactor: 1 });
+      const page = await browser.newPage({ viewport: { width, height: 850 }, deviceScaleFactor: 1, geolocation: { latitude: -8.65, longitude: 115.216 }, permissions: ['geolocation'] });
       await page.route('**/*', route => {
         const url = new URL(route.request().url());
         if (url.hostname === 'photon.komoot.io') {
