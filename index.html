@@ -208,7 +208,7 @@ html,body{background:#fff}
 .map-visibility-toggle{display:inline-flex;align-items:center;gap:7px;border:1px solid #dce9e5;background:#f2f8f6;color:#147d73;border-radius:20px;padding:8px 12px;font-size:10px;font-weight:800;margin:2px 0 13px}.map-visibility-toggle:active{transform:scale(.98)}
 /* Beranda: peta hanya tampil saat pengguna membuka alur pemesanan. */
 .app-shell .map-area{display:none}
-</style>
+\n/* Beranda: lokasi tampil singkat, lalu prompt pencarian berganti secara alami. */\n.home-search-copy b{transition:opacity .22s ease}.home-search-copy small{transition:opacity .5s ease}.home-search-copy small.location-fade{opacity:0}\n</style>
 </head>
 <body>
 <div class="app app-shell">
@@ -216,8 +216,16 @@ html,body{background:#fff}
 
 <div class="map-area"><div id="map"></div><div class="map-loading" id="mapLoading">Memuat peta…</div><div class="map-top-pill"><i></i><span id="mapCaption">Peta lokasi perjalanan</span></div><div class="map-eta" id="mapEta"><small>ESTIMASI TIBA</small><span id="mapEtaValue">Mencari driver</span></div><div class="driver-count-pill" id="driverCountPill"><i></i><span>8 driver di sekitar</span></div><div class="radius-legend" id="radiusLegend">Radius 1,5 km</div><div class="map-hint" id="mapHint"></div><button class="map-location" id="locate" aria-label="Gunakan lokasi saya">◎</button></div>
 <main class="home-screen" id="homeScreen">
-<button class="home-search" data-nav="quick"><span class="search-glass">⌕</span><span class="home-search-copy"><b>Mau pergi atau pesan sesuatu?</b><small>⌖ Lokasi otomatis</small></span></button>
-<section class="home-section"><div class="home-section-head"><div><h2>Pilih layanan</h2><small class="section-subtitle">Mulai dari kebutuhanmu hari ini</small></div><button data-nav="quick">Semua layanan</button></div>
+<button class="home-search" data-nav="quick" aria-label="Cari layanan dan inspirasi"><span class="search-glass">⌕</span><span class="home-search-copy"><b id="homeSearchPrompt">Makanan khas lokal</b><small id="homeSearchLocation">Bali, Indonesia</small></span></button>
+<section class="home-section stories-section"><div class="home-section-head"><div><h2>Cara menikmati hari</h2><small class="section-subtitle">Temukan inspirasi untuk harimu</small></div><span class="story-count">01 — 05</span></div>
+<div class="story-carousel">
+<button class="story-card" data-story="motor"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS MOTORBIKE</small><b>Perjalanan aman, nyaman bersama pengemudi perempuan.</b><em>Kenali layanan ↗</em></span></button>
+<button class="story-card" data-story="bike"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS BIKE</small><b>Lebih lincah menjelajahi kota.</b><em>Kenali layanan ↗</em></span></button>
+<button class="story-card" data-story="food"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS FOOD</small><b>Menu favorit dari tempat makan pilihan.</b><em>Jelajahi makanan ↗</em></span></button>
+<button class="story-card" data-story="car"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS CAR</small><b>Perjalanan lebih lega bersama orang tersayang.</b><em>Kenali layanan ↗</em></span></button>
+<button class="story-card" data-story="courier"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS COURIER</small><b>Kirim barang dengan mudah dan praktis.</b><em>Kenali kurir ↗</em></span></button>
+</div></section>
+<section class="home-section"><div class="home-section-head"><div><h2>Mau ngapain hari ini?</h2><small class="section-subtitle">Pilih yang kamu butuhkan</small></div><button data-nav="quick">Semua layanan</button></div>
 <div class="service-grid">
 <button class="service-tile" data-service="ride"><span class="service-icon">🛵</span><b>Motorbike</b><small>Perjalanan motor</small></button>
 <button class="service-tile" data-service="car"><span class="service-icon">🚘</span><b>Mobil</b><small>Perjalanan mobil</small></button>
@@ -227,14 +235,6 @@ html,body{background:#fff}
 <button class="service-tile" data-service="parcel"><span class="service-icon">🛍️</span><b>Antar barang</b><small>Same day</small></button>
 <button class="service-tile" data-service="groceries"><span class="service-icon">🧺</span><b>Belanja</b><small>Kebutuhan harian</small></button>
 <button class="service-tile" data-service="tickets"><span class="service-icon">🎟️</span><b>Tiket</b><small>Aktivitas & wisata</small></button>
-</div></section>
-<section class="home-section stories-section"><div class="home-section-head"><div><h2>Cara baru menikmati hari</h2><small class="section-subtitle">Kenali layanan PLUITS Trans</small></div><span class="story-count">01 — 05</span></div>
-<div class="story-carousel">
-<button class="story-card" data-story="motor"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS MOTORBIKE</small><b>Perjalanan aman, nyaman bersama pengemudi perempuan.</b><em>Kenali layanan ↗</em></span></button>
-<button class="story-card" data-story="bike"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS BIKE</small><b>Lebih lincah menjelajahi kota.</b><em>Kenali layanan ↗</em></span></button>
-<button class="story-card" data-story="food"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS FOOD</small><b>Menu favorit dari tempat makan pilihan.</b><em>Jelajahi makanan ↗</em></span></button>
-<button class="story-card" data-story="car"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS CAR</small><b>Perjalanan lebih lega bersama orang tersayang.</b><em>Kenali layanan ↗</em></span></button>
-<button class="story-card" data-story="courier"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS COURIER</small><b>Kirim barang dengan mudah dan praktis.</b><em>Kenali kurir ↗</em></span></button>
 </div></section>
 <p class="home-footer-note">PLUITS Trans · Semua layanan, satu perjalanan.</p></main>
 <section class="nav-panel" id="navPanel" aria-live="polite"></section>
@@ -528,6 +528,6 @@ document.addEventListener('click',e=>{
  if(e.target.closest('[data-checkout]')){showCheckout();return;}
  if(e.target.closest('[data-place-order]')){placeLocalOrder();return;}
 });
-initMap();updateSaveUI('pickup');updateSaveUI('destination');clearFare();homeScreen.classList.remove('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';setNavActive('home');
+\nconst homeSearchPrompts=["Makanan khas lokal","Kopi enak di dekat sini","Temukan tempat menarik","Mau makan apa hari ini?","Jelajahi Bali"];\nlet homePromptIndex=0;\nconst homePrompt=$("homeSearchPrompt"),homeLocation=$("homeSearchLocation");\nif(homeLocation){setTimeout(()=>homeLocation.classList.add("location-fade"),2600);}\nif(homePrompt){setInterval(()=>{homePrompt.style.opacity="0";setTimeout(()=>{homePromptIndex=(homePromptIndex+1)%homeSearchPrompts.length;homePrompt.textContent=homeSearchPrompts[homePromptIndex];homePrompt.style.opacity="1";},220);},3200);}\ninitMap();updateSaveUI('pickup');updateSaveUI('destination');clearFare();homeScreen.classList.remove('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';setNavActive('home');
 </script>
 </body></html>
