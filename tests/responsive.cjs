@@ -74,13 +74,13 @@ const { chromium } = require('playwright');
               if (!article.title || article.paragraphs < 3 || article.related < 2 || article.serviceCta !== 'food' || article.hash !== '#story-food') {
                 failures.push({ width, path, issue: 'food article or relevant related-reading flow incomplete', article });
               }
-              await page.locator('[data-open-stories]').first().click();
+              await page.locator('.story-article [data-open-stories]').click();
               const index = await page.evaluate(() => ({
                 cards: document.querySelectorAll('.stories-index [data-story]').length,
                 heading: document.querySelector('.stories-index h1')?.textContent || '',
                 hash: location.hash
               }));
-              if (index.cards !== 5 || index.heading !== 'Cerita & inspirasi' || index.hash !== '#stories') {
+              if (index.cards !== 6 || index.heading !== 'Cerita & inspirasi' || index.hash !== '#stories') {
                 failures.push({ width, path, issue: 'all-articles index did not render', index });
               }
               await page.locator('.stories-index [data-story="courier"]').click();
@@ -91,6 +91,24 @@ const { chromium } = require('playwright');
               }));
               if (courier.service !== 'courier' || courier.paragraphs < 3 || !courier.title.includes('paket')) {
                 failures.push({ width, path, issue: 'courier article is not relevant to courier service', courier });
+              }
+              await page.locator('.stories-index [data-story="coffee"]').click();
+              const coffee = await page.evaluate(() => ({
+                title: document.querySelector('.story-article h1')?.textContent || '',
+                paragraphs: document.querySelectorAll('.story-article .article-body p').length,
+                service: document.querySelector('.article-service [data-story-service]')?.getAttribute('data-story-service'),
+                summary: document.querySelector('.story-article .article-summary')?.textContent || ''
+              }));
+              if (!coffee.title.toLowerCase().includes('secangkir kopi') || coffee.paragraphs < 4 || coffee.service !== 'marketplace' || !coffee.summary.toLowerCase().includes('usaha')) {
+                failures.push({ width, path, issue: 'coffee story does not explain emotional local-business and marketplace purpose', coffee });
+              }
+              await page.locator('.story-article [data-story-service="marketplace"]').click();
+              const marketplace = await page.evaluate(() => ({
+                heading: document.querySelector('.nav-panel h1')?.textContent || '',
+                status: document.querySelector('.nav-panel .price')?.textContent || ''
+              }));
+              if (marketplace.heading !== 'PLUITS Marketplace' || !marketplace.status.toLowerCase().includes('segera')) {
+                failures.push({ width, path, issue: 'Marketplace ecosystem destination is unclear', marketplace });
               }
               await page.goBack();
               await page.waitForTimeout(30);
