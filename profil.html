@@ -16,6 +16,48 @@ main{max-width:620px;margin:18px auto;padding:0 14px 90px}.eyebrow{font-size:10p
 .section-title{font-size:12px;font-weight:850;margin:20px 2px 8px}.row{width:100%;display:flex;align-items:center;gap:12px;padding:14px 4px;border:0;border-bottom:1px solid #eff2f1;background:#fff;text-align:left;color:var(--ink);cursor:pointer}.row:last-child{border-bottom:0}.ico{width:35px;height:35px;border-radius:11px;background:#f1f7f5;display:grid;place-items:center;color:var(--teal);font-size:16px}.row span:nth-child(2){flex:1}.row b{display:block;font-size:12px}.row small{display:block;font-size:10px;color:var(--muted);margin-top:3px}.arrow{color:#93a19f}
 .notice{font-size:10px;color:#7d8c8b;line-height:1.5;background:#f7f9f8;border-radius:12px;padding:12px;margin-top:14px}
 nav{position:fixed;bottom:0;left:0;right:0;height:62px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding-bottom:env(safe-area-inset-bottom)}nav a{font-size:10px;color:#7b8b89;text-decoration:none;text-align:center}nav a.active{color:var(--teal);font-weight:850}nav i{display:block;font-style:normal;font-size:18px;margin-bottom:2px}
+
+/* Profile layout: 320px phones to desktop */
+html{width:100%;min-width:0;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
+header{width:100%;min-width:0;gap:10px;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+.brand{min-width:0;gap:7px;font-size:clamp(12px,3.5vw,14px)}
+.brand>span:last-child{white-space:nowrap}
+.back{flex:0 0 auto;white-space:nowrap;padding:8px 9px}
+main{width:100%;max-width:620px;margin:clamp(12px,4vw,22px) auto 0;padding:0 clamp(11px,3.8vw,16px) calc(100px + env(safe-area-inset-bottom))}
+.heading{font-size:clamp(23px,7vw,28px);line-height:1.12}
+.sub{font-size:clamp(11px,3.2vw,12px);line-height:1.55;max-width:58ch}
+.card{min-width:0;width:100%;padding:clamp(12px,4vw,16px);margin:10px 0;border-radius:clamp(14px,4vw,18px)}
+.identity{gap:clamp(10px,3.5vw,13px)}
+.identity>div:last-child{min-width:0;overflow-wrap:anywhere}
+.identity b{font-size:clamp(13px,3.8vw,15px);line-height:1.35}
+.identity small{line-height:1.45;overflow-wrap:anywhere}
+.avatar{flex:0 0 clamp(48px,15vw,58px);width:clamp(48px,15vw,58px);height:clamp(48px,15vw,58px)}
+.membership p,.notice{line-height:1.55;overflow-wrap:anywhere}
+.section-title{margin:18px 2px 8px}
+.row{gap:10px;padding:clamp(12px,3.8vw,14px) 3px}
+.row>span:nth-child(2){flex:1 1 0;min-width:0}
+.row b,.row small{line-height:1.4;overflow-wrap:anywhere}
+.ico{flex:0 0 35px}
+.arrow{flex:0 0 auto}
+nav{height:calc(62px + env(safe-area-inset-bottom));padding:5px max(4px,env(safe-area-inset-right)) calc(5px + env(safe-area-inset-bottom)) max(4px,env(safe-area-inset-left));}
+nav a{flex:1;min-width:0;font-size:clamp(9px,2.8vw,10px);line-height:1.25;white-space:nowrap}
+nav i{font-size:clamp(17px,5vw,19px);margin-bottom:2px}
+@media(max-width:360px){
+ header{height:56px;padding-inline:10px;gap:6px}
+ .mark{width:28px;height:28px;flex:0 0 28px}
+ .back{font-size:10px;padding:7px 8px}
+ main{padding-inline:11px}
+ .card{padding:12px}
+ .row{gap:8px}
+ nav a{font-size:9px}
+}
+@media(min-width:621px){
+ main{padding-inline:18px}
+}
+@media(prefers-reduced-motion:reduce){
+ *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
 </style></head>
 <body>
 <header><a class="brand" href="./pluittrans.html"><span class="mark">p</span><span>PLUITS <em>Trans</em></span></a><a class="back" href="./pluittrans.html">‹ Beranda</a></header>
