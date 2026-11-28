@@ -107,7 +107,7 @@ html,body{background:#fff}
 .home-location{display:flex;align-items:center;gap:7px;color:#6b7d7f;font-size:11px;margin-bottom:13px}
 .home-location strong{color:#233c40;font-size:12px}
 .home-search{display:flex;align-items:center;gap:10px;width:100%;padding:13px 14px;border:1px solid #e7eeeb;border-radius:15px;background:#f8fbfa;color:#77898b;text-align:left;font-size:12px;box-shadow:0 3px 12px #163b3505}
-.home-search .search-glass{font-size:18px;color:#258d82}
+.home-search .search-glass{font-size:18px;color:#258d82}.home-search-copy{display:flex;flex-direction:column;gap:3px;min-width:0}.home-search-copy b{font-size:12px;font-weight:650;color:#536a6a}.home-search-copy small{font-size:9px;font-weight:650;color:#879795}
 .home-section{margin-top:23px}
 .home-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .home-section-head h2{font-size:16px;letter-spacing:-.03em;margin:0;font-weight:850}
@@ -216,8 +216,7 @@ html,body{background:#fff}
 
 <div class="map-area"><div id="map"></div><div class="map-loading" id="mapLoading">Memuat peta…</div><div class="map-top-pill"><i></i><span id="mapCaption">Peta lokasi perjalanan</span></div><div class="map-eta" id="mapEta"><small>ESTIMASI TIBA</small><span id="mapEtaValue">Mencari driver</span></div><div class="driver-count-pill" id="driverCountPill"><i></i><span>8 driver di sekitar</span></div><div class="radius-legend" id="radiusLegend">Radius 1,5 km</div><div class="map-hint" id="mapHint"></div><button class="map-location" id="locate" aria-label="Gunakan lokasi saya">◎</button></div>
 <main class="home-screen" id="homeScreen">
-<button class="home-search" data-nav="quick"><span class="search-glass">⌕</span><span>Mau pergi atau pesan sesuatu?</span></button>
-<div class="home-location compact"><span>⌖</span><div><small>Lokasi kamu</small><br><strong>Bali, Indonesia</strong></div><button data-nav="profile">Ubah lokasi</button></div>
+<button class="home-search" data-nav="quick"><span class="search-glass">⌕</span><span class="home-search-copy"><b>Mau pergi atau pesan sesuatu?</b><small>⌖ Lokasi otomatis</small></span></button>
 <section class="home-section"><div class="home-section-head"><div><h2>Pilih layanan</h2><small class="section-subtitle">Mulai dari kebutuhanmu hari ini</small></div><button data-nav="quick">Semua layanan</button></div>
 <div class="service-grid">
 <button class="service-tile" data-service="ride"><span class="service-icon">🛵</span><b>Motorbike</b><small>Perjalanan motor</small></button>
