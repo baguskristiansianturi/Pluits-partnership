@@ -610,7 +610,8 @@ button,input,select,textarea{font:inherit;max-width:100%}
 .article-related .home-section-head{align-items:center}
 .story-related-carousel{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 10px 12px 0;margin-right:-10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .story-related-carousel::-webkit-scrollbar{display:none}
-.story-related-carousel .story-related-card{flex:0 0 min(72%,245px);scroll-snap-align:start}
+.story-related-carousel .story-related-card{flex:0 0 min(88%,360px);scroll-snap-align:start}
+@media(min-width:700px){.story-related-carousel .story-related-card{flex-basis:min(72%,300px)}}
 @media(max-width:360px){.stories-index{padding-inline:11px}.stories-index-grid{gap:9px}.story-related-copy{padding:8px}.story-related-copy b{font-size:11px}.story-article{padding-inline:11px}}
 @media(min-width:600px){.stories-index-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
@@ -971,6 +972,23 @@ function showStory(key){
  };
  const c=ctaCopy[d.service]||{title:'Temukan layanan PLUITS',body:'Kenali lebih dekat pengalaman yang sedang kami siapkan.',button:'Jelajahi PLUITS'};
  navPanel.innerHTML='<article class="story-article"><button class="service-back" data-nav="home">‹ Kembali ke beranda</button><div class="article-kicker">'+d.k+'</div><div class="story-hero" role="img" aria-label="'+d.title+'" style="background-image:url(\''+d.img+'\')"></div><h1>'+d.title+'</h1><p class="article-summary">'+d.summary+'</p><div class="article-meta">'+d.read+' <span>·</span> PLUITS Journal</div><div class="article-body">'+paragraphs+'</div><section class="article-service"><small>LANJUTKAN PERJALANANMU</small><b>'+c.title+'</b><p>'+c.body+'</p><button class="article-cta" data-story-service="'+d.service+'">'+c.button+' →</button></section><section class="article-related"><div class="home-section-head"><div><h2>Lanjutkan membaca</h2><small class="section-subtitle">Cerita lain yang mungkin kamu sukai</small></div><button data-open-stories>Lihat semua</button></div><div class="story-related-carousel">'+related+'</div></section><footer class="article-footer"><b>PLUITS Journal</b><p>Cerita tentang usaha lokal, mobilitas, dan kesempatan untuk tumbuh bersama.</p><small>© 2026 PLUITS. Semua hak dilindungi.</small></footer></article>'
+ const relatedCarousel=navPanel.querySelector('.story-related-carousel');
+ if(window.__pluitsRelatedCarouselTimer)clearInterval(window.__pluitsRelatedCarouselTimer);
+ if(window.__pluitsRelatedCarouselResume)clearTimeout(window.__pluitsRelatedCarouselResume);
+ if(relatedCarousel){
+  const relatedCards=[...relatedCarousel.querySelectorAll('.story-related-card')];
+  let userInteracting=false;
+  const resumeAuto=()=>{userInteracting=true;if(window.__pluitsRelatedCarouselResume)clearTimeout(window.__pluitsRelatedCarouselResume);window.__pluitsRelatedCarouselResume=setTimeout(()=>{userInteracting=false;},6500);};
+  relatedCarousel.addEventListener('touchstart',resumeAuto,{passive:true});
+  relatedCarousel.addEventListener('pointerdown',resumeAuto,{passive:true});
+  relatedCarousel.addEventListener('wheel',resumeAuto,{passive:true});
+  window.__pluitsRelatedCarouselTimer=setInterval(()=>{
+   if(userInteracting||relatedCards.length<2)return;
+   const current=relatedCards.reduce((best,card,i)=>Math.abs((card.offsetLeft-relatedCarousel.offsetLeft)-relatedCarousel.scrollLeft)<best.distance?{index:i,distance:Math.abs((card.offsetLeft-relatedCarousel.offsetLeft)-relatedCarousel.scrollLeft)}:best,{index:0,distance:Infinity}).index;
+   const next=(current+1)%relatedCards.length;
+   relatedCarousel.scrollTo({left:next===0?0:relatedCards[next].offsetLeft-relatedCards[0].offsetLeft,behavior:'smooth'});
+  },4800);
+ }
  window.scrollTo({top:0,behavior:'smooth'});
 }
 
