@@ -10,6 +10,12 @@ const { chromium } = require('playwright');
       const page = await browser.newPage({ viewport: { width, height: 850 }, deviceScaleFactor: 1 });
       await page.route('**/*', route => {
         const url = new URL(route.request().url());
+        if (url.hostname === 'photon.komoot.io') {
+          return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({features:[
+            {type:'Feature',geometry:{type:'Point',coordinates:[115.1728,-8.7185]},properties:{name:'Hard Rock Hotel Bali',country:'Indonesia',city:'Kuta',state:'Bali',osm_key:'tourism',osm_value:'hotel'}},
+            {type:'Feature',geometry:{type:'Point',coordinates:[107.6098,-6.9147]},properties:{name:'Hard Rock Bandung',country:'Indonesia',city:'Bandung',state:'Jawa Barat',osm_key:'tourism',osm_value:'hotel'}}
+          ]})});
+        }
         if (url.hostname !== '127.0.0.1') return route.abort();
         return route.continue();
       });
@@ -87,6 +93,17 @@ const { chromium } = require('playwright');
                   (booking.nav && booking.sheet.bottom > booking.nav.top + 1)) {
                 failures.push({width, path, issue: 'map-first motorcycle booking reference layout failed', booking});
               }
+              await page.locator('.bottom-nav [data-nav="home"]').click();
+              await page.locator('.service-tile[data-service="ride"]').first().click();
+              await page.locator('#pickup').fill('Hard Rock');
+              await page.waitForSelector('.suggestions .suggestion');
+              const placeResults = await page.locator('.suggestions').innerText();
+              if (!placeResults.includes('Hard Rock Hotel Bali') || placeResults.includes('Hard Rock Bandung')) {
+                failures.push({width,path,issue:'place autocomplete did not prioritize nearby Bali result',placeResults});
+              }
+              await page.locator('.suggestions .suggestion').first().click();
+              const selectedPlace = await page.locator('#pickup').inputValue();
+              if (!selectedPlace.includes('Hard Rock Hotel Bali')) failures.push({width,path,issue:'place suggestion selection did not set pickup',selectedPlace});
               await page.locator('.bottom-nav [data-nav="home"]').click();
             } catch (error) {
               failures.push({width, path, issue: 'motor booking layout interaction test error', error: String(error)});
