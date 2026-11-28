@@ -80,7 +80,7 @@ const { chromium } = require('playwright');
                 heading: document.querySelector('.stories-index h1')?.textContent || '',
                 hash: location.hash
               }));
-              if (index.cards !== 6 || index.heading !== 'Cerita & inspirasi' || index.hash !== '#stories') {
+              if (index.cards !== 7 || index.heading !== 'Cerita & inspirasi' || index.hash !== '#stories') {
                 failures.push({ width, path, issue: 'all-articles index did not render', index });
               }
               await page.locator('.stories-index [data-story="courier"]').click();
@@ -92,6 +92,25 @@ const { chromium } = require('playwright');
               if (courier.service !== 'courier' || courier.paragraphs < 3 || !courier.title.includes('paket')) {
                 failures.push({ width, path, issue: 'courier article is not relevant to courier service', courier });
               }
+              await page.locator('.stories-index [data-story="inclusive"]').click();
+              const inclusive = await page.evaluate(() => ({
+                title: document.querySelector('.story-article h1')?.textContent || '',
+                paragraphs: document.querySelectorAll('.story-article .article-body p').length,
+                cta: document.querySelector('.article-service [data-story-service]')?.getAttribute('data-story-service')
+              }));
+              if (!inclusive.title.toLowerCase().includes('setiap orang') || inclusive.paragraphs < 4 || inclusive.cta !== 'inclusive-coming-soon') {
+                failures.push({ width, path, issue: 'inclusive employment article is incomplete', inclusive });
+              }
+              await page.locator('.article-service [data-story-service="inclusive-coming-soon"]').click();
+              const comingSoon = await page.evaluate(() => ({
+                title: document.querySelector('.nav-panel h1')?.textContent || '',
+                label: document.querySelector('.nav-panel span')?.textContent || '',
+                notice: document.querySelector('.nav-panel .empty-state b')?.textContent || ''
+              }));
+              if (!comingSoon.title.includes('Kesempatan kerja') || comingSoon.label !== 'SEGERA HADIR' || comingSoon.notice !== 'Masih dalam pengembangan') {
+                failures.push({ width, path, issue: 'inclusive program coming-soon state is unclear', comingSoon });
+              }
+              await page.locator('[data-story="inclusive"]').last().click();
               await page.locator('.stories-index [data-story="coffee"]').click();
               const coffee = await page.evaluate(() => ({
                 title: document.querySelector('.story-article h1')?.textContent || '',
