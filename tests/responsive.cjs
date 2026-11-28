@@ -111,7 +111,7 @@ const { chromium } = require('playwright');
                 failures.push({ width, path, issue: 'inclusive program coming-soon state is unclear', comingSoon });
               }
               await page.locator('[data-nav="home"]').click();
-              await page.locator('[data-open-stories]').last().click();
+              await page.locator('[data-open-stories]:visible').click();
               await page.locator('.stories-index [data-story="coffee"]').click();
               const coffee = await page.evaluate(() => ({
                 title: document.querySelector('.story-article h1')?.textContent || '',
