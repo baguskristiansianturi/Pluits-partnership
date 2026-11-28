@@ -791,6 +791,6 @@ let homePromptIndex=0;
 const homePrompt=$("homeSearchPrompt"),homeLocation=$("homeSearchLocation");
 if(homeLocation){setTimeout(()=>homeLocation.classList.add("location-fade"),2600);}
 if(homePrompt){setInterval(()=>{homePrompt.style.opacity="0";setTimeout(()=>{homePromptIndex=(homePromptIndex+1)%homeSearchPrompts.length;homePrompt.textContent=homeSearchPrompts[homePromptIndex];homePrompt.style.opacity="1";},220);},3200);}
-mapRequested=true;initMap();updateSaveUI('pickup');updateSaveUI('destination');clearFare();homeScreen.classList.remove('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';setNavActive('home');
+mapRequested=true;initMap();updateSaveUI('pickup');updateSaveUI('destination');clearFare();restoreRoute();
 </script>
 </body></html>
