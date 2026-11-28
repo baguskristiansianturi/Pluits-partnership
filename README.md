@@ -39,3 +39,19 @@ Layanan peta, geocoding, dan routing publik digunakan untuk prototipe; memiliki 
 - Jangan menaruh pekerjaan fitur Trans kembali di repository utama PLUITS.
 - Modul transportasi dikembangkan terpisah dan terstruktur agar mudah dipelihara.
 - Tidak menggunakan Supabase sebagai ketergantungan backend.
+
+## Halaman layanan
+
+Beranda PLUITS Partner mengarahkan setiap layanan ke halaman HTML tersendiri:
+
+- Motorbike: `motorbike.html`
+- Mobil: `mobil.html`
+- Makanan: `makanan.html`
+- Kopi & Minuman: `kopi.html`
+- Kurir: `kurir.html`
+- Antar Barang: `antar-barang.html`
+- Belanja: `belanja.html`
+- Tiket & Aktivitas: `tiket.html`
+- Travel: `travel.html`
+
+Halaman-halaman layanan yang baru dibuat saat ini menyediakan alur antarmuka/pratinjau lokal. Integrasi pemesanan, pembayaran, dan penugasan mitra secara langsung masih memerlukan implementasi backend.
