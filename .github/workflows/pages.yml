@@ -47,6 +47,14 @@ jobs:
                   subprocess.run(['node', '--check', str(target)], check=True)
           print('Navigation selectors, service routes, and inline JavaScript syntax validated.')
           PY
+      - name: Test responsive layouts in Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/pluits-pages.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+          node tests/responsive.cjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static site
