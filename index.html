@@ -179,6 +179,38 @@ html,body{background:#fff}
 @media(min-width:560px){.app-shell{border-left:1px solid #eef2f0;border-right:1px solid #eef2f0}.bottom-nav{border-left:1px solid #eef2f0;border-right:1px solid #eef2f0}}
 @media(max-width:360px){.service-grid{gap:12px 5px}.service-icon{width:48px;height:47px}.home-screen{padding-left:12px;padding-right:12px}.home-promo{grid-template-columns:1fr 76px}.promo-art{height:78px;font-size:44px}}
 
+
+/* Editorial service carousel and map-on-demand */
+.home-location.compact{display:flex;align-items:center;gap:8px;padding:4px 1px 13px}
+.home-location.compact button{margin-left:auto;border:0;background:#edf8f5;color:#16877c;border-radius:20px;padding:7px 10px;font-size:10px;font-weight:750}
+.section-subtitle{font-size:10px;color:#879493;display:block;margin-top:4px}
+.story-count{font-size:10px;color:#8b9b99;font-weight:750;white-space:nowrap}
+.story-carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:1px 15px 9px 0;margin-right:-15px;scrollbar-width:none}
+.story-carousel::-webkit-scrollbar{display:none}
+.story-card{position:relative;flex:0 0 84%;height:214px;border:0;border-radius:19px;overflow:hidden;text-align:left;color:white;padding:0;scroll-snap-align:start;background:#274c49}
+.story-image,.story-shade{position:absolute;inset:0}
+.story-image{background-size:cover;background-position:center}
+.story-shade{background:linear-gradient(0deg,#071e20e8 0%,#092a2a65 45%,#092a2a08 100%)}
+.story-copy{position:absolute;left:16px;right:15px;bottom:16px;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.story-copy small{font-size:9px;letter-spacing:.14em;font-weight:850;color:#c9f3e9}
+.story-copy b{font-size:18px;line-height:1.18;letter-spacing:-.035em;max-width:270px}
+.story-copy em{font-size:10px;font-style:normal;font-weight:800;color:#d5f8ed;margin-top:2px}
+.service-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 8px}
+.service-tile b{font-size:10px}.service-tile small{font-size:9px;line-height:1.25}
+.location-preview{margin-top:24px}
+.mini-location-map{height:86px;width:100%;position:relative;overflow:hidden;border:1px solid #e4eeea;border-radius:15px;background:#e9f2ec;text-align:left}
+.mini-map-grid{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 22px,#d9e8dd 23px 24px),repeating-linear-gradient(90deg,transparent 0 34px,#d9e8dd 35px 36px)}
+.mini-map-pin{position:absolute;left:48%;top:27%;font-size:22px;color:#078c80;text-shadow:0 2px 4px #fff}
+.mini-map-label{position:absolute;left:12px;bottom:10px;background:#fff;border-radius:20px;padding:6px 9px;font-size:10px;font-weight:750;color:#385454}
+.mini-map-action{position:absolute;right:12px;bottom:10px;color:#14877e;background:white;border-radius:50%;width:27px;height:27px;display:grid;place-items:center}
+.story-article{padding:18px 15px 30px}
+.story-hero{height:205px;border-radius:18px;background-size:cover;background-position:center;margin:15px 0}
+.story-article h1{font-size:25px;line-height:1.12;letter-spacing:-.045em;margin:5px 0 12px}
+.story-article p{font-size:12px;line-height:1.7;color:#647779}
+.story-article .article-kicker{font-size:10px;color:#13877c;font-weight:850;letter-spacing:.12em}
+.story-article .article-cta{background:#078c80;color:#fff;border:0;border-radius:12px;padding:13px 16px;font-weight:850;font-size:11px;margin-top:10px}
+@media(min-width:480px){.story-card{flex-basis:78%;height:230px}}
+
 </style>
 </head>
 <body>
@@ -187,26 +219,29 @@ html,body{background:#fff}
 
 <div class="map-area"><div id="map"></div><div class="map-loading" id="mapLoading">Memuat peta…</div><div class="map-top-pill"><i></i><span id="mapCaption">Peta lokasi perjalanan</span></div><div class="map-eta" id="mapEta"><small>ESTIMASI TIBA</small><span id="mapEtaValue">Mencari driver</span></div><div class="driver-count-pill" id="driverCountPill"><i></i><span>8 driver di sekitar</span></div><div class="radius-legend" id="radiusLegend">Radius 1,5 km</div><div class="map-hint" id="mapHint"></div><button class="map-location" id="locate" aria-label="Gunakan lokasi saya">◎</button></div>
 <main class="home-screen" id="homeScreen">
-<div class="home-location"><span>⌖</span><div><small>Lokasi kamu</small><br><strong>Bali, Indonesia</strong></div><span style="margin-left:auto;color:#16877c;font-weight:800">⌄</span></div>
-<button class="home-search" data-nav="quick"><span class="search-glass">⌕</span><span>Pesan perjalanan, kopi, makanan, dan lainnya</span></button>
-<section class="home-section"><div class="home-section-head"><h2>Apa yang ingin kamu lakukan?</h2><button data-nav="quick">Semua layanan</button></div>
-<div class="service-grid">
-<button class="service-tile" data-service="ride"><span class="service-icon">🛵</span><b>Motor</b><small>Ride</small></button>
-<button class="service-tile" data-service="car"><span class="service-icon">🚘</span><b>Mobil</b><small>Ride</small></button>
-<button class="service-tile" data-service="food"><span class="service-icon">🍜</span><b>Makanan</b><small>Food</small></button>
-<button class="service-tile" data-service="coffee"><span class="service-icon">☕</span><b>Kopi</b><small>Coffee</small></button>
-<button class="service-tile" data-service="courier"><span class="service-icon">📦</span><b>Kurir</b><small>Delivery</small></button>
-<button class="service-tile" data-service="parcel"><span class="service-icon">🛍️</span><b>Antar barang</b><small>Send</small></button>
-<button class="service-tile" data-service="groceries"><span class="service-icon">🧺</span><b>Belanja</b><small>Market</small></button>
-<button class="service-tile" data-service="tickets"><span class="service-icon">🎟️</span><b>Tiket</b><small>Explore</small></button>
+<div class="home-location compact"><span>⌖</span><div><small>Lokasi kamu</small><br><strong>Bali, Indonesia</strong></div><button data-nav="profile">Ubah lokasi</button></div>
+<button class="home-search" data-nav="quick"><span class="search-glass">⌕</span><span>Mau pergi atau pesan sesuatu?</span></button>
+<section class="home-section stories-section"><div class="home-section-head"><div><h2>Cara baru menikmati hari</h2><small class="section-subtitle">Kenali layanan PLUITS Trans</small></div><span class="story-count">01 — 05</span></div>
+<div class="story-carousel">
+<button class="story-card" data-story="motor"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS MOTORBIKE</small><b>Perjalanan aman, nyaman bersama pengemudi perempuan.</b><em>Kenali layanan ↗</em></span></button>
+<button class="story-card" data-story="bike"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS BIKE</small><b>Lebih lincah menjelajahi kota.</b><em>Kenali layanan ↗</em></span></button>
+<button class="story-card" data-story="food"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS FOOD</small><b>Menu favorit dari tempat makan pilihan.</b><em>Jelajahi makanan ↗</em></span></button>
+<button class="story-card" data-story="car"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS CAR</small><b>Perjalanan lebih lega bersama orang tersayang.</b><em>Kenali layanan ↗</em></span></button>
+<button class="story-card" data-story="courier"><span class="story-image" style="background-image:url('https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=900&auto=format&fit=crop&q=85')"></span><span class="story-shade"></span><span class="story-copy"><small>PLUITS COURIER</small><b>Kirim barang dengan mudah dan praktis.</b><em>Kenali kurir ↗</em></span></button>
 </div></section>
-<section class="home-section"><div class="home-promo"><div><div class="promo-kicker">Ngopi sebentar?</div><h3>Kopi favorit,<br>diantar ke kamu.</h3><p>Jelajahi minuman dan camilan di sekitar.</p><button class="promo-button" data-service="coffee">Pesan kopi</button></div><div class="promo-art">☕</div></div></section>
-<section class="home-section"><div class="home-section-head"><h2>Jelajahi PLUITS</h2><button data-nav="quick">Lihat semua</button></div>
-<div class="home-place-card"><div class="place-emoji">🍽️</div><div class="place-info"><b>Restoran & kafe</b><small>Temukan menu dan tempat makan</small></div><button class="place-action" data-service="food">Jelajahi</button></div>
-<div class="home-place-card"><div class="place-emoji">🧭</div><div class="place-info"><b>Perjalanan & wisata</b><small>Transportasi, tiket, dan akomodasi</small></div><button class="place-action" data-service="travel">Buka</button></div>
-<div class="home-place-card"><div class="place-emoji">🚚</div><div class="place-info"><b>Antar jemput & pengiriman</b><small>Pesan kendaraan atau kirim barang</small></div><button class="place-action" data-service="courier">Pesan</button></div>
-</section><p class="home-footer-note">PLUITS Trans · Satu aplikasi untuk perjalanan dan layanan harian</p>
-</main>
+<section class="home-section"><div class="home-section-head"><div><h2>Pilih layanan</h2><small class="section-subtitle">Mulai dari kebutuhanmu hari ini</small></div><button data-nav="quick">Semua layanan</button></div>
+<div class="service-grid">
+<button class="service-tile" data-service="ride"><span class="service-icon">🛵</span><b>Motorbike</b><small>Perjalanan motor</small></button>
+<button class="service-tile" data-service="car"><span class="service-icon">🚘</span><b>Mobil</b><small>Perjalanan mobil</small></button>
+<button class="service-tile" data-service="food"><span class="service-icon">🍜</span><b>Makanan</b><small>Food delivery</small></button>
+<button class="service-tile" data-service="coffee"><span class="service-icon">☕</span><b>Kopi</b><small>Coffee & snack</small></button>
+<button class="service-tile" data-service="courier"><span class="service-icon">📦</span><b>Kurir</b><small>Antar paket</small></button>
+<button class="service-tile" data-service="parcel"><span class="service-icon">🛍️</span><b>Antar barang</b><small>Same day</small></button>
+<button class="service-tile" data-service="groceries"><span class="service-icon">🧺</span><b>Belanja</b><small>Kebutuhan harian</small></button>
+<button class="service-tile" data-service="tickets"><span class="service-icon">🎟️</span><b>Tiket</b><small>Aktivitas & wisata</small></button>
+</div></section>
+<section class="home-section location-preview"><div class="home-section-head"><div><h2>Lokasi di sekitarmu</h2><small class="section-subtitle">Pratinjau lokasi, bukan peta pemesanan</small></div></div><button class="mini-location-map" data-nav="quick"><span class="mini-map-grid"></span><span class="mini-map-pin">●</span><span class="mini-map-label">Bali, Indonesia</span><span class="mini-map-action">◎</span></button></section>
+<p class="home-footer-note">PLUITS Trans · Semua layanan, satu perjalanan.</p></main>
 <section class="nav-panel" id="navPanel" aria-live="polite"></section>
 <div class="booking-screen hide" id="bookingScreen">
 <div class="content">
@@ -470,8 +505,18 @@ function renderDiscover(type){
  const cards=ticket?[['🎟️','Aktivitas & atraksi','Temukan kegiatan menarik'],['🎫','Tiket acara','Jelajahi acara dan hiburan'],['🏞️','Wisata lokal','Ide perjalanan dekat']]:[['🧭','Rencana perjalanan','Inspirasi tujuan dan rute'],['🏨','Akomodasi','Temukan tempat menginap'],['🚐','Transportasi','Pilihan perjalanan antar kota']];
  navPanel.innerHTML='<div class="service-page"><button class="service-back" data-nav="quick">‹ Semua layanan</button><p class="nav-panel-kicker">PLUITS Explore</p><h1>'+title+'</h1><p class="service-lead">Temukan pengalaman, rencana perjalanan, dan layanan pendukung dalam satu tempat.</p>'+cards.map((c,i)=>'<div class="store-card"><div class="store-art">'+c[0]+'</div><div class="store-info"><b>'+c[1]+'</b><small>'+c[2]+'</small><div class="price">Segera tersedia</div></div><button class="add-item" data-select-experience="'+i+'">Pilih</button></div>').join('')+'<p style="font-size:10px;color:#879594;margin-top:16px">Tampilan awal untuk pengembangan modul. Pemesanan tiket dan akomodasi belum terhubung.</p></div>';
 }
+
+const storyData={
+motor:{k:'PLUITS MOTORBIKE',title:'Perjalanan aman dan nyaman, bersama pengemudi perempuan.',img:'https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=1200&auto=format&fit=crop&q=85',body:'PLUITS Motorbike dirancang untuk perjalanan harian yang praktis. Pilih titik jemput dan tujuan, lihat ringkasan perjalanan, lalu lanjutkan pemesanan. Kami juga menyiapkan konsep pilihan pengemudi perempuan sebagai bagian dari pengalaman perjalanan yang memberi rasa nyaman dan pilihan bagi pengguna.',cta:'Pesan Motorbike',service:'ride'},
+bike:{k:'PLUITS BIKE',title:'Lebih lincah menjelajahi kota.',img:'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=1200&auto=format&fit=crop&q=85',body:'Pilihan perjalanan ringkas untuk aktivitas sehari-hari. Konsep layanan ini akan dikembangkan dengan pilihan kendaraan dan detail perjalanan yang jelas.',cta:'Lihat pilihan perjalanan',service:'ride'},
+food:{k:'PLUITS FOOD',title:'Makanan favorit dari tempat pilihan.',img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&auto=format&fit=crop&q=85',body:'Temukan restoran, jelajahi menu, tambahkan makanan ke keranjang, dan siapkan pesanan dalam satu alur. Modul restoran dan kafe akan terhubung dengan PLUITS Partnership.',cta:'Jelajahi makanan',service:'food'},
+car:{k:'PLUITS CAR',title:'Perjalanan lebih lega dan nyaman.',img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format&fit=crop&q=85',body:'Pilih mobil sesuai kebutuhan perjalanan. Masukkan lokasi penjemputan dan tujuan, lalu tinjau detail rute sebelum pemesanan.',cta:'Pesan mobil',service:'car'},
+courier:{k:'PLUITS COURIER',title:'Kirim barang dengan mudah dan praktis.',img:'https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=1200&auto=format&fit=crop&q=85',body:'Atur lokasi penjemputan, tujuan penerima, dan jenis barang. Semua detail pengiriman disiapkan agar mudah diperiksa sebelum dilanjutkan.',cta:'Kirim barang',service:'courier'}
+};
+function showStory(key){const d=storyData[key];if(!d)return;activePage='story';homeScreen.classList.add('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';navPanel.classList.add('show');setNavActive('home');navPanel.innerHTML='<article class="story-article"><button class="service-back" data-nav="home">‹ Kembali ke beranda</button><div class="article-kicker">'+d.k+'</div><div class="story-hero" style="background-image:url(\''+d.img+'\')"></div><h1>'+d.title+'</h1><p>'+d.body+'</p><p>PLUITS terus mengembangkan pengalaman layanan yang terintegrasi dalam satu aplikasi. Detail operasional dan ketersediaan akan mengikuti tahap pengembangan berikutnya.</p><button class="article-cta" data-story-service="'+d.service+'">'+d.cta+' →</button></article>';window.scrollTo({top:0,behavior:'smooth'});}
+
 function showNavPage(page){
- if(page==='home'){activePage='home';homeScreen.classList.remove('hide');bookingScreen.classList.add('hide');navPanel.classList.remove('show');mapArea.style.display='block';setNavActive('home');map?.resize();window.scrollTo({top:0,behavior:'smooth'});return;}
+ if(page==='home'){activePage='home';homeScreen.classList.remove('hide');bookingScreen.classList.add('hide');navPanel.classList.remove('show');mapArea.style.display='none';setNavActive('home');window.scrollTo({top:0,behavior:'smooth'});return;}
  if(page==='quick'){showQuick();return;}
  homeScreen.classList.add('hide');bookingScreen.classList.add('hide');mapArea.style.display='none';navPanel.classList.add('show');setNavActive(page);activePage=page;
  if(page==='trips'){navPanel.innerHTML=renderTrips();}
@@ -481,6 +526,7 @@ function showNavPage(page){
 /* Navigation is delegated so controls created by service pages also work. */
 document.addEventListener('click',e=>{
  const nav=e.target.closest('[data-nav]');if(nav){showNavPage(nav.dataset.nav);return;}
+ const storyCard=e.target.closest('[data-story]');if(storyCard){showStory(storyCard.dataset.story);return;}
  const service=e.target.closest('[data-service]');if(service){const k=service.dataset.service;if(k==='ride'||k==='car')goRide(k);else if(k==='coffee'||k==='food'||k==='groceries')renderStore(k);else if(k==='courier'||k==='parcel')renderDelivery(k);else if(k==='tickets'||k==='travel')renderDiscover(k);else showQuick();return;}
  if(e.target.closest('[data-review-delivery]')){const from=$('deliveryPickup')?.value.trim(),to=$('deliveryDrop')?.value.trim();if(!from||!to){notify('Isi lokasi penjemputan dan tujuan');return;}const itemType=$('deliveryType').value;localOrders.unshift({id:'PT-'+String(Date.now()).slice(-6),items:[{name:itemType,qty:1}],total:0,address:to,status:'Pratinjau pengiriman',type:activePage});navPanel.innerHTML='<div class="service-page"><p class="nav-panel-kicker">Pengiriman</p><h1>Rute pengiriman siap</h1><p class="service-lead">Detail pengiriman sudah dirangkum untuk pengujian front-end.</p><div class="order-card"><span class="order-status">Pratinjau</span><b>'+esc(from)+' → '+esc(to)+'</b><p style="font-size:11px;color:#7b8a8c">'+esc(itemType)+'</p><small style="color:#839091">Belum ada kurir yang menerima. Sistem pengiriman belum terhubung.</small></div><button class="primary-wide" data-nav="trips">Lihat transaksi</button><button class="primary-wide" style="background:#edf8f5;color:#167d73" data-nav="home">Beranda</button></div>';renderTrips();notify('Pratinjau pengiriman disiapkan');return;}\n if(e.target.closest('[data-select-experience]')){notify('Pilihan ini disiapkan untuk modul Explore berikutnya');return;}\n const add=e.target.closest('[data-add]');if(add){const [type,idx]=add.dataset.add.split('|');const coffee=type==='coffee',food=type==='food',grocery=type==='groceries';const lists={coffee:[['Kopi susu gula aren',22000],['Es kopi latte',25000],['Croissant butter',18000],['Matcha latte',27000]],food:[['Mie ayam',28000],['Nasi ayam',32000],['Salad segar',29000],['Kue hari ini',20000]],groceries:[['Susu segar',18000],['Roti tawar',16000],['Buah pilihan',24000],['Kebutuhan rumah',35000]],parcel:[['Paket kecil',12000],['Barang belanja',15000],['Paket hadiah',18000]]};const item=lists[type][Number(idx)];const found=cartItems.find(x=>x.name===item[0]);if(found)found.qty++;else cartItems.push({name:item[0],price:item[1],qty:1});const area=$('cartArea');if(area)area.innerHTML=renderCart();notify(item[0]+' ditambahkan');return;}
  if(e.target.closest('[data-checkout]')){showCheckout();return;}
